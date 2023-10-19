@@ -1,0 +1,13 @@
+issues: 
+
+1. color, orientation, and size of scene show diversity
+2. background of scene may be complicated, texture on background is difficult to distinguish from real textures
+3. interference factors in natural scene (noise, distortion, unbalanced info)
+
+survey of approaches
+1. two-step approaches: handle text detection and text recognition separately
+2. end-to-end approaches: handle two modules simultaneously, allow a shared feature map
+
+Scene Text Detection and DL
+- regression-based scene text detection
+-- 
