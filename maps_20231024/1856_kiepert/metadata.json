@@ -1,0 +1,61 @@
+{
+    "title": "Plan of Jerusalem originally sketched from Sieber and Catherwood : corrected by the measurements of Robinson and Smith : the streets corrected from the plans of Tobler and the English engineers / engr. by L. Lipmann. From: Four maps to accompany the Biblical researches in Palestine of E. Robinson and E. Smith (Boston 1856)",
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q65958",
+        "name": "Heinrich Kiepert",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "L. Lipmann",
+        "new_entity": true
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1856-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Later Biblical Researches in Palestine and the Adjacent Regions A Journal of Travels in the Year 1852",
+            "authors": [{
+                "wikidata_qid": "Q629131",
+                "name": "Edward Robinson",
+                "new_entity": false
+                },
+                {
+                "wikidata_qid": "Q5360320",
+                "name": "Eli Smith",
+                "new_entity": false
+                }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1856-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q16988836",
+                "name": "Crocker & Brewster",
+                "location": {
+                    "wikidata_qid": "Q100",
+                    "name": "Boston",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1856_kiepert/book/1856_robinson.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Later_Biblical_Researches_in_Palestine_a/VdYWAAAAQAAJ?hl=en&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1856_kiepert/kiepert_1856.jpeg"
+}
+  

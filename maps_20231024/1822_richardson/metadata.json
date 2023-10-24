@@ -1,0 +1,54 @@
+{
+    "title": "Ichnographical Plan of Jerusalem & its Environs",
+    "publishers": [{
+        "wikidata_qid": "Q18528913",
+        "name": "Thomas Cadell",
+        "location": {
+            "wikidata_qid": "Q84",
+            "name": "London",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023681680205171/NLI#$FL7072127",
+        "code": "990023681680205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q55189913",
+        "name": "Robert Richardson",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1822-04-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Travels along the Mediterranean and parts adjacent, ... with the Earl of Belmore, during 1816-18 ... as far as the second cataract ... Jerusalem, Damascus, Balbec, etc Volume II",
+            "authors": [{
+                "wikidata_qid": "Q55189913",
+                "name": "Robert Richardson",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1822-04-01T00:00:00Z"
+                },
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1822_richardson/book/1822_richardson_book.pdf"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1822_richardson/richardson_1822.tif"
+}
+  

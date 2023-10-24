@@ -1,0 +1,65 @@
+{
+    "title": "Plan ancien & moderne de Jérusalem / Par le Dr. Ermete Pierotti",
+    "paper_extent": "14.9x10.1 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023695950205171/NLI?volumeItem=1#$FL184621691",
+        "code": "990023695950205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Samuel Duc",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1869-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "French"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Topographie ancienne et moderne de Jérusalem",
+            "authors": [{
+                "wikidata_qid": "Q7004397",
+                "name": "Ermete Pierotti",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1869-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q0",
+                "name": "Howard & Delisle",
+                "location": {
+                    "wikidata_qid": "Q807",
+                    "name": "Lausanne",
+                    "new_entity": false
+                },
+                "new_entity": true
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "French"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1869_pierotti_2/book/1869_pierotti_book.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Topographie_ancienne_et_moderne_de_J%C3%A9ru/CEU-AAAAcAAJ?hl=en&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1869_pierotti_2/pierotti_1869_2.jpeg"
+
+}

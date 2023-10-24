@@ -1,0 +1,55 @@
+{
+    "title": "Plan von Jerusalem und seiner naechsten Umgebung / Riess hist.-geogr. Bibel Atlas.",
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023681690205171/NLI#$FL7072559",
+        "code": "990023681690205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q1287923",
+        "name": "Richard Von Riess",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1865-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Die Länder der Heiligen Schrift, historisch-geographischer Bibel-Atlas in 7en Karten",
+            "authors": [{
+                "wikidata_qid": "Q1287923",
+                "name": "Richard Von Riess",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1865-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q0",
+                "name": "B. Herder",
+                "location": {
+                    "wikidata_qid": "Q36378",
+                    "name": "Freiburg",
+                    "new_entity": false
+                },
+                "new_entity": true
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": null,
+            "google_books_url": "https://books.google.ch/books/about/Die_L%C3%A4nder_der_Heiligen_Schrift.html?id=CxtRvwEACAAJ&redir_esc=y"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1865_riess/riess_1865.jpeg"
+}
+  

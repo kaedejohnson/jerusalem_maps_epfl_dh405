@@ -1,0 +1,94 @@
+{
+    "title": "Plan of Jerusalem [cartographic material] / A.H. Dufour Del.",
+    "paper_extent": "26.4x21.0 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://nli.org.il/en/maps/NNL_ALEPH990023680540205171/NLI#$FL7072535I",
+        "code": "990023680540205171"
+    },
+    "engravers": [{
+        "wikidata_qid": "Q2871221",
+        "name": "Auguste Henri Dufour",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1837-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Three Years in the East: Being the Substance of a Journal Written During a Tour and Residence in Greece, Egypt, Palestine, Syria and Turkey in 1829-1830, 1831 and 1832",
+            "authors": [{
+                "wikidata_qid": "Q0",
+                "name": "George Robinson",
+                "new_entity": true
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1837-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q18593589",
+                "name": "A. and William Galignani",
+                "location": {
+                    "wikidata_qid": "Q90",
+                    "name": "Paris",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q84",
+                "name": "Henry Colburn",
+                "location": {
+                    "wikidata_qid": "Q90",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }
+            ],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1837_dufour/book/1837_robinson_book.pdf"
+        }],
+        "translations": [
+            {
+            "title": "Voyage en Palestine et en Syrie, Volume 1",
+            "authors": [{
+                "wikidata_qid": "Q0",
+                "name": "George Robinson",
+                "new_entity": true
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1838-01-01T00:00:00Z"
+                },
+                "publishers": [{
+                    "wikidata_qid": "Q2865431",
+                    "name": "Arthus-Bertrand ",
+                    "location": {
+                        "wikidata_qid": "Q90",
+                        "name": "Paris",
+                        "new_entity": false
+                    },
+                    "new_entity": false
+                }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "French"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1837_dufour/book/1837_robinson_book_fr.pdf"
+            }
+        ]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1837_dufour/dufour_1837.jpg"
+}
+  

@@ -1,0 +1,60 @@
+{
+    "title": "Plan of Jerusalem [cartographic material] : from actual survey / by F. Catherwood, Architect Colen's Lithography.",
+    "publishers": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "location": {
+            "wikidata_qid": "Q84",
+            "name": "New York",
+            "new_entity": false
+        },
+        "new_entity": false
+    },
+    {
+        "wikidata_qid": "Q55665185",
+        "name": "John H. Colen",
+        "location": {
+            "wikidata_qid": "Q84",
+            "name": "New York",
+            "new_entity": false
+        },
+        "new_entity": false
+    }
+    ],
+    "paper_extent": "198.5x144.5 cm",
+    "scale": "1:1420",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_MAPS_JER990023702500205171/NLI#$FL7071926",
+        "code": "990023702500205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q55665185",
+        "name": "John H. Colen",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1835-07-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1838-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1835_catherwood/catherwood_1835.jpeg"
+}
+  

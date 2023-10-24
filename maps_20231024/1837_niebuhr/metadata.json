@@ -1,0 +1,65 @@
+{
+    "title": "Grundriss der Stadt Jerusalem",
+    "publishers": [{
+        "wikidata_qid": "Q97084",
+        "name": "Friedrich Perthes",
+        "location": {
+            "wikidata_qid": "Q1055",
+            "name": "Hamburg",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "23.0x17.5 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023681420205171//NLI#$FL7071942",
+        "code": "990023681420205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q57420",
+        "name": "Carsten Niebuhr",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1837-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Carsten Niebuhrs Reisebeschreibung nach Arabien und andern umliegenden Ländern. Dritter Band.",
+            "authors": [{
+                "wikidata_qid": "Q57420",
+                "name": "Carsten Niebuhr",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1837-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q97084",
+                "name": "Friedrich Perthes",
+                "location": {
+                    "wikidata_qid": "Q1055",
+                    "name": "Hamburg",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1837_niebuhr/book/1837_niebuhr_book.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Carsten_Niebuhrs_Reisebeschreibung_nach/FlZKAAAAYAAJ?hl=en&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1837_niebuhr/niebuhr_1837.jpeg"
+}
+  

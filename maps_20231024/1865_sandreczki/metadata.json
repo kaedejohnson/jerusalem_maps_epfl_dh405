@@ -1,0 +1,75 @@
+{
+    "title": "Ordnance Survey of Jerusalem [cartographic material] / The Survey was made in the Years 1864-5 by Captain Charles W. Wilson, R.E. and a party of Royal Engieers from the Ordnance Survey under the direction of Colonel Sir Henry James. Engraved at the Ordnance Survey Office, Southampton under the direction of Colonel J. Cameron, R.E.",
+    "paper_extent": null,
+    "scale": "1:2500",
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q80134635",
+        "name": "Carl Sandreczki",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Parsons",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q80134635",
+        "name": "Carl Sandreczki",
+        "new_entity": false
+    },
+    {
+        "wikidata_qid": "Q0",
+        "name": "Ohly, Chancellor of the Prussian Consulate",
+        "new_entity": true
+    },
+    {
+        "wikidata_qid": "Q0",
+        "name": "Yakûb-as-Saa'ty",
+        "new_entity": true
+    }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1865-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1866-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Ordnance Survey of Jerusalem, Volume 1",
+            "authors": [{
+                "wikidata_qid": "Q612080",
+                "name": "Charles William Wilson",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1866-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q5422976",
+                "name": "Eyre and Spottiswoode",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1865_wilson/book/1865_wilson_book.pdf",
+            "google_books_url": "https://books.google.it/books?id=9HsYAQAAMAAJ&printsec=frontcover&hl=it&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1865_wilson/wilson_1865.jpeg"
+}
+  

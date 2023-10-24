@@ -1,0 +1,106 @@
+{
+    "title": "Plan of Jerusalem : sketched from Sieber and Catherwood, corrected by the measurements of Robinson and Smith / drawn by H. Kiepert",
+    "paper_extent": null,
+    "scale": "1:10000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023696610205171/NLI#$FL7070935",
+        "code": "990023696610205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q65958",
+        "name": "Heinrich Kiepert",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q110226203",
+        "name": "Heinrich Mahlmann",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q629131",
+        "name": "Edward Robinson",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q5360320",
+        "name": "Eli Smith",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1841-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Biblical Researches in Palestine, Mount Sinai and Arabia Petraea A Journal of Travels in the Year 1838. Vol. I, II and III",
+            "authors": [{
+                "wikidata_qid": "Q629131",
+                "name": "Edward Robinson",
+                "new_entity": false
+                },
+                {
+                "wikidata_qid": "Q5360320",
+                "name": "Eli Smith",
+                "new_entity": false
+                }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1841-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q16988836",
+                "name": "Crocker & Brewster",
+                "location": {
+                    "wikidata_qid": "Q100",
+                    "name": "Boston",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q6273657",
+                "name": "Jonathan Leavitt",
+                "location": {
+                    "wikidata_qid": "Q60",
+                    "name": "New York",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q1232629",
+                "name": "John Murray",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q88296372",
+                "name": "Verlag der Buchhandlung des Waisenhauses",
+                "location": {
+                    "wikidata_qid": "Q2814",
+                    "name": "Halle",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }
+            ],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_kiepert/book/1841_robinson_smith_book_vol3.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Biblical_Researches_in_Palestine_Mount_S/Vt0uAAAAQAAJ?hl=de&gbpv=1&dq=Biblical+researches+in+Palestine,+Mount+Sinai+and+Arabia+Petraea+memoir&pg=RA1-PA29&printsec=frontcover"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_kiepert/kiepert_1841.jpeg"
+}
+  

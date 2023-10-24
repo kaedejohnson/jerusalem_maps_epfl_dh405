@@ -1,0 +1,45 @@
+{
+    "title": "Grundriss / von Jerusalem nach Catherwood und Robinson mit einem neu eingezeichneten Gassennetze und etlichen, theils zum ersten Male erscheenenden, theils berichtigten gräberplänen. Dr. Titus Tobler",
+    "publishers": [{
+        "wikidata_qid": "Q0",
+        "name": "Huber und Comp.",
+        "location": {
+            "wikidata_qid": "Q25607",
+            "name": "St. Gallen",
+            "new_entity": false
+        },
+        "new_entity": true
+    }],
+    "paper_extent": "47.5x62.0",
+    "scale": "1:6120",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990034871160205171/NLI#$FL169298872",
+        "code": "990034871160205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q124465",
+        "name": "Titus Tobler",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q1734647",
+        "name": "Joh. Wurster und Comp.",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q124465",
+        "name": "Titus Tobler",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1847-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1847_tobler/tobler_1847.jpeg"
+}
+  

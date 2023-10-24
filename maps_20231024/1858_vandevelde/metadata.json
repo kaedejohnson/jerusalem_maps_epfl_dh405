@@ -1,0 +1,100 @@
+{
+    "title": "Plan of the town and environs of Jerusalem constructed from the English Ordnance Survey and measurements of Dr. T. Tobler by C.W.M. van de Velde... With Memoir by Dr. Titus Tobler. Engr. by Biedermann, Eberhardt and Stichardt.",
+    "publishers": [{
+        "wikidata_qid": "Q1774204",
+        "name": "Justus Perthes",
+        "location": {
+            "wikidata_qid": "Q6986",
+            "name": "Gotha",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "63.0x80.0 cm",
+    "scale": "1:4843",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_MAPS_JER990023681940205171/NLI#$FL7072713",
+        "code": "990023681940205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q1066642",
+        "name": "Charles William Meredith van de Velde",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Biedermann",
+        "new_entity": true
+    },
+    {
+        "wikidata_qid": "Q0",
+        "name": "H. Eberhardt",
+        "new_entity": true
+    },
+    {
+        "wikidata_qid": "Q0",
+        "name": "H. Stichardt",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q1066642",
+        "name": "Charles William Meredith van de Velde",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q124465",
+        "name": "Titus Tobler",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1858-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Planography of Jerusalem : memoir to accompany the new-ground-plan of the city of Jerusalem and the environs, constructed anew by C.W.M. Vande Velde",
+            "authors": [{
+                "wikidata_qid": "Q124465",
+                "name": "Titus Tobler",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1858-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q1774204",
+                "name": "Justus Perthes",
+                "location": {
+                    "wikidata_qid": "Q6986",
+                    "name": "Gotha",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q84",
+                "name": "Williams & Norgate",
+                "location": {
+                    "wikidata_qid": "Q6986",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }
+            ],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1858_vandevelde/book/1858_tobler.pdf"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1858_vandevelde/vandevelde_1858.jpeg"
+}
+  

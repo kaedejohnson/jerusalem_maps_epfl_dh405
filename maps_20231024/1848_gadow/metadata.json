@@ -1,0 +1,60 @@
+{
+    "title": "Jerusalem",
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q0",
+        "name": "H. Gadow",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q0",
+        "name": "H. Gadow",
+        "new_entity": true
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1848-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1849-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "Language Code"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Title of the Book",
+            "authors": [{
+                "wikidata_qid": "Q54321",
+                "name": "Philipp Wolff",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1849-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q1661918",
+                "name": "J.B. Metzler",
+                "location": {
+                    "wikidata_qid": "Q1022",
+                    "name": "Stuttgart",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1848_wolff/book/1849_wolff.pdf",
+            "google_books_url": "https://books.google.it/books?id=GORAAQAAMAAJ&printsec=frontcover&hl=de&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1848_wolff/wolff_1848.tiff"
+}
+  

@@ -1,0 +1,77 @@
+{
+    "title": "Plan von Jerusalem : entw. nach Sieber und Catherwood, berichtigt durch Beobaehtungen von Robinson und Smith / Entworfen u. gezeichnet von H. Kiepert. In Stein gest: von H.Mahlmann.",
+    "paper_extent": "31.8x26.7 cm",
+    "scale": "1:10000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023700220205171/NLI#$FL7070712",
+        "code": "990023700220205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q65958",
+        "name": "Heinrich Kiepert",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q110226203",
+        "name": "Heinrich Mahlmann",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q629131",
+        "name": "Edward Robinson",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q5360320",
+        "name": "Eli Smith",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1841-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Palästina und die südlich angrenzenden Länder: Tagebuch einer Reise im Jahre 1838 in Bezug auf die biblische Geographie, Volume 3.",
+            "authors": [{
+                "wikidata_qid": "Q629131",
+                "name": "Edward Robinson",
+                "new_entity": false
+                },
+                {
+                "wikidata_qid": "Q5360320",
+                "name": "Eli Smith",
+                "new_entity": false
+                }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1841-01-01T00:00:00Z"
+                },
+            "publishers": [
+            {
+                "wikidata_qid": "Q88296372",
+                "name": "Verlag der Buchhandlung des Waisenhauses",
+                "location": {
+                    "wikidata_qid": "Q2814",
+                    "name": "Halle",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }
+            ],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_kiepert_2/book/1841_robinson_smith_vol3_de.pdf",
+            "google_books_url": "https://books.google.ch/books?id=ecJhAAAAcAAJ&printsec=frontcover&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_kiepert_2/kiepert_1841_2.jpeg"
+}
+  

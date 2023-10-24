@@ -1,0 +1,60 @@
+{
+    "title": "Plan de Jérusalem d'apres M. Van de Velde / dessiné par A. de Mandrot Lt. Colonel d'Etat Major. Lith. F. Gendre.",
+    "paper_extent": "19.4x21.9",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023681270205171/NLI#$FL7070598",
+        "code": "990023681270205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q78065660",
+        "name": "Louis-Alphonse de Mandrot",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "F. Gendre",
+        "new_entity": true
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1861-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "French"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Voyage en Terre-Sainte",
+            "authors": [{
+                "wikidata_qid": "Q78058784",
+                "name": "Félix Bovet",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1861-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q0",
+                "name": "L. Meyer et Cie",
+                "location": {
+                    "wikidata_qid": "Q69345",
+                    "name": "Neuchatel",
+                    "new_entity": false
+                },
+                "new_entity": true
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "French"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1861_mandrot/book/1861_bovet.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Voyage_en_Terre_Sainte/vLYUAAAAQAAJ?hl=en&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1861_mandrot/mandrot_1861.jpeg"
+}
+  

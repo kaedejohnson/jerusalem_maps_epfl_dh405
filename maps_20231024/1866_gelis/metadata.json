@@ -1,0 +1,81 @@
+{
+    "title": "Plan Topographique de Jérusalem",
+    "publishers": [{
+        "wikidata_qid": "Q21645742",
+        "name": "Imp. Lemercier",
+        "location": {
+            "wikidata_qid": "Q90",
+            "name": "Paris",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": null,
+    "scale": "1:10000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/books/NNL_ALEPH990021516530205171/NLI",
+        "code": "990021516530205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q117462072",
+        "name": "Charles Gelis",
+        "new_entity": true
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q38480338",
+        "name": "Erhard Schieble",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q117462072",
+        "name": "Charles Gelis",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q55072238",
+        "name": "Félicien de Saulcy",
+        "new_entity": false
+        }
+    ],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1866-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "French"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Les derniers jours de Jérusalem",
+            "authors": [{
+                "wikidata_qid": "Q55072238",
+                "name": "Félicien de Saulcy",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1866-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q54321",
+                "name": "Hachette",
+                "location": {
+                    "wikidata_qid": "Q54321",
+                    "name": "Paris",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "French"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1866_gelis/book/1866_saulcy.pdf",
+            "google_books_url": "https://www.google.com/books/edition/_/r9VCHIXw5sUC?gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1866_gelis/gelis_1866.jpeg"
+}
+  

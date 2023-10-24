@@ -1,0 +1,44 @@
+{
+    "title": "Plan de Jerusalem ancienne et moderne / par le Docteur Ermete Pierotti.",
+    "publishers": [{
+        "wikidata_qid": "Q0",
+        "name": "Samuel Duc",
+        "location": {
+            "wikidata_qid": "Q71",
+            "name": "Geneve",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "42.6x34.3 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023695950205171/NLI?volumeItem=1#$FL184621691",
+        "code": "990023695950205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Samuel Duc",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1869-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "French"
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1869_pierotti/pierotti_1869.jpeg"
+}

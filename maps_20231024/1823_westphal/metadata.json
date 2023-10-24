@@ -1,0 +1,99 @@
+{
+    "title": "Jerusalem und seine nächsten Umgebungen",
+    "publishers": [{
+        "wikidata_qid": "Q67485",
+        "name": "Heinrich Berghaus",
+        "location": {
+            "wikidata_qid": "Q1022",
+            "name": "Stuttgart",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "dimension of the map in cm",
+    "scale": "1:2000",
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q87518",
+        "name": "Johann Heinrich Westphal",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Author Name",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q87518",
+        "name": "Johann Heinrich Westphal",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "YYYY-MM-DDT00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "Language Code"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Title of the Book",
+            "authors": [{
+                "wikidata_qid": "Q54321",
+                "name": "Author Name",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "YYYY-MM-DDT00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q54321",
+                "name": "publisher name",
+                "location": {
+                    "wikidata_qid": "Q54321",
+                    "name": "name of the Location",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "Language Code"
+            },
+            "book_path": "path/to/book.pdf"
+        }],
+        "translations": [
+            {
+            "title": "Title of the Book",
+            "authors": [{
+                "wikidata_qid": "Q54321",
+                "name": "Author Name",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "YYYY-MM-DDT00:00:00Z"
+                },
+                "publishers": [{
+                    "wikidata_qid": "Q54321",
+                    "name": "publisher name",
+                    "location": {
+                        "wikidata_qid": "Q54321",
+                        "name": "name of the Location",
+                        "new_entity": false
+                    },
+                    "new_entity": false
+                }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "Language Code"
+            },
+            "book_path": "path/to/book.pdf"
+            }
+        ]
+    },
+    "image_path": "path/to/image.jpg"
+}
+  

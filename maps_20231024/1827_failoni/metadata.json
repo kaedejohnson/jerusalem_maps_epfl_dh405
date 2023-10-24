@@ -1,0 +1,69 @@
+{
+    "title": "Piano dell'Antica e Nuova Gerusalemme e Suoi Contorni",
+    "publishers": [{
+        "wikidata_qid": "Q102286952",
+        "name": "Pietro Bisesti",
+        "location": {
+            "wikidata_qid": "Q2028",
+            "name": "Verona",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q0",
+        "name": "Giovanni Failoni",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q0",
+        "name": "Giovanni Failoni",
+        "new_entity": true
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1833-01-01T00:00:00Z"
+    },
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1827-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "Italian"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Viaggio in Siria e nella Terra Santa : preceduto da alcune notizie geografiche e d'alcuni cenni sulle diverse religioni che professano gli abitanti di quelle contrade / di Giovanni Failoni. Con piani del antica e nuova Gerusalemme e colla pianta del gran tempio del Santo Sepolcro.",
+            "authors": [{
+                "wikidata_qid": "Q0",
+                "name": "Giovanni Failoni",
+                "new_entity": true
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1833-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q102286952",
+                "name": "Pietro Bisesti",
+                "location": {
+                    "wikidata_qid": "Q2028",
+                    "name": "Verona",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "Italian"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1827_failoni/book/1833_failoni_book.pdf"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1827_failoni/failoni_1827.jpeg"
+}
+  

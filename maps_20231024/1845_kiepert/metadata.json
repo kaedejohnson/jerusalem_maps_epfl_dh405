@@ -1,0 +1,72 @@
+{
+    "title": "Title :  Plan von Jerusalem nach den Untersuchungen / von Dr. Ernst Gustav Schultz, ... mit Benutzung der Pläne von Sieber und Catherwood und der Berichtigungen von Robinson und Smith. Gezeichn ; von Heinrich Kiepert",
+    "paper_extent": "51.0x70.5",
+    "scale": "1:6000",
+    "is_in_nli": false,
+    "mapmakers": [{
+        "wikidata_qid": "Q65958",
+        "name": "Heinrich Kiepert",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "v. L Preuss",
+        "new_entity": true
+    }],
+    "surveyors": [
+        {
+        "wikidata_qid": "Q29589246",
+        "name": "Ernst Gustav Schultz",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q629131",
+        "name": "Edward Robinson",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q5360320",
+        "name": "Eli Smith",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1845-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Jerusalem : eine Vorlesung / von Ernst Gustav Schultz mit einem Plane, gezeichnet von H. Kiepert.",
+            "authors": [{
+                "wikidata_qid": "Q29589246",
+                "name": "Ernst Gustav Schultz",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1845-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q79053438",
+                "name": "Simon Schropp",
+                "location": {
+                    "wikidata_qid": "Q64",
+                    "name": "Berlin",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1845_kiepert/book/1845_schultz_book.pdf",
+            "google_books_url": "https://www.google.com/books/edition/_/WJg9AAAAcAAJ?gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1845_kiepert/kiepert_1845.jpeg"
+}
+  

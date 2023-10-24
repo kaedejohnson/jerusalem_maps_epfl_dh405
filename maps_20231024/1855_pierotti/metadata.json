@@ -1,0 +1,39 @@
+{
+    "title": "Plan de Iérusalem / D. Ermete Pierotti Architetto Ing.re rilevo e disegno Niccola Cellai incise.",
+    "paper_extent": "49.2x69.2 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"url/NLI",
+        "code": "code of NLI"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q0",
+        "name": "Nicola Cellai",
+        "new_entity": true
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1855-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1855-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "Italian"
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1855_pierotti/pierotti_1855.jpg"
+}
+  

@@ -1,0 +1,79 @@
+{
+    "title": "Plan of Jerusalem : According to the original survey made in 1841, by Lieutts Aldrich and Symonds, Royal Engineerswith correction of the SW angle of the Temple wall 1852 / C.W.M. Van De Velde W. & A. K. Johnston.",
+    "paper_extent": "19.5x21.4",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990039417010205171/NLI#$FL45605186",
+        "code": "990039417010205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q1066642",
+        "name": "Charles William Meredith van de Velde",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q86359774",
+        "name": "A. K. Johnston",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q1066642",
+        "name": "Charles William Meredith van de Velde",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1852-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1854-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Narrative of a Journey Through Syria and Palestine in 1851 and 1852, Volume 1",
+            "authors": [{
+                "wikidata_qid": "Q1066642",
+                "name": "Charles William Meredith van de Velde",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1854-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q880978",
+                "name": "William Blackwood and Sons",
+                "location": {
+                    "wikidata_qid": "Q23436",
+                    "name": "Edinburgh",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q880978",
+                "name": "William Blackwood and Sons",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1852_vandevelde/book/1854_vandevelde.pdf",
+            "google_books_url": "https://books.google.ch/books?id=6IrTWyrlVN4C&printsec=frontcover&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1852_vandevelde/vandevelde_1852.jpeg"
+}
+  

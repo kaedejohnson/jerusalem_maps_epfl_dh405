@@ -1,0 +1,55 @@
+{
+    "title": "Plan von Jerusalem : nach der Untersuchungen / von Wilh. Krafft.",
+    "paper_extent": "35.0x27.0 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990025313530205171/NLI#$FL7073061",
+        "code": "990025313530205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q2574008",
+        "name": "Wilhelm Ludwig Krafft",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1846-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Die Topographie Jerusalem's",
+            "authors": [{
+                "wikidata_qid": "Q2574008",
+                "name": "Wilhelm Ludwig Krafft",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1846-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q0",
+                "name": "H. B. König",
+                "location": {
+                    "wikidata_qid": "Q586",
+                    "name": "Bonn",
+                    "new_entity": false
+                },
+                "new_entity": true
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1846_krafft/book/1846_krafft_book.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Die_Topographie_Jerusalem_s/9nJETYwi-TAC?hl=en&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1846_krafft/krafft_1846.jpg"
+}
+  

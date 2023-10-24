@@ -1,0 +1,109 @@
+{
+    "title": "Title of the Map",
+    "publishers": [{
+        "wikidata_qid": "Q54321",
+        "name": "publisher name - if the plan was published direcly inside of the book, then no need to repeat the information here!",
+        "location": {
+            "wikidata_qid": "Q54321",
+            "name": "name of the Location",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "dimension of the map in cm",
+    "scale": "1:2000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"url/NLI",
+        "code": "code of NLI"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q54321",
+        "name": "Author Name",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q54321",
+        "name": "Author Name",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q54321",
+        "name": "Author Name",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1827-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "YYYY-MM-DDT00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "Language Code"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Title of the Book",
+            "authors": [{
+                "wikidata_qid": "Q54321",
+                "name": "Author Name",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "YYYY-MM-DDT00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q54321",
+                "name": "publisher name",
+                "location": {
+                    "wikidata_qid": "Q54321",
+                    "name": "name of the Location",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "Language Code"
+            },
+            "book_path": "path/to/book.pdf",
+            "google_books_url": "path/to/googlebooks.pdf"
+        }],
+        "translations": [
+            {
+            "title": "Title of the Book",
+            "authors": [{
+                "wikidata_qid": "Q54321",
+                "name": "Author Name",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "YYYY-MM-DDT00:00:00Z"
+                },
+                "publishers": [{
+                    "wikidata_qid": "Q54321",
+                    "name": "publisher name",
+                    "location": {
+                        "wikidata_qid": "Q54321",
+                        "name": "name of the Location",
+                        "new_entity": false
+                    },
+                    "new_entity": false
+                }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "Language Code"
+            },
+            "book_path": "path/to/book.pdf",
+            "google_books_url": "path/to/googlebooks.pdf"
+            }
+        ]
+    },
+    "image_path": "path/to/image.jpg"
+}
+  

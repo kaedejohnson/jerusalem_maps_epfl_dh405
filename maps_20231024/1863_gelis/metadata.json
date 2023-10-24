@@ -1,0 +1,85 @@
+{
+    "title": "Nivellement de Jérusalem",
+    "publishers": [{
+        "wikidata_qid": "Q21645742",
+        "name": "Imp. Lemercier",
+        "location": {
+            "wikidata_qid": "Q90",
+            "name": "Paris",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": null,
+    "scale": "1:5000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/books/NNL_ALEPH990017311590205171/NLI",
+        "code": "990017311590205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q117462072",
+        "name": "Charles Gelis",
+        "new_entity": true
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q38480338",
+        "name": "Erhard Schieble",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q117462072",
+        "name": "Charles Gelis",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q55072238",
+        "name": "Félicien de Saulcy",
+        "new_entity": false
+        }
+    ],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1863-12-23T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1865-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "French"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Voyage en Terre Sainte",
+            "authors": [{
+                "wikidata_qid": "Q55072238",
+                "name": "Félicien de Saulcy",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1865-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q71724092",
+                "name": "Didier et Cie",
+                "location": {
+                    "wikidata_qid": "Q90",
+                    "name": "Paris",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "French"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1863_gelis/book/1865_saulcy_book.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/_/hqfMlbtqgncC?hl=de&gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1863_gelis/gelis_1863.jpeg"
+}
+  

@@ -1,0 +1,102 @@
+{
+    "title": "Plan of the town and environs of Jerusalem : From the original drawing of the survey made in the month of March 1841 / By Lieutts. Aldrich and Symonds... The writings added by the Revd. G. Williams... and the Revd. Robert Willis. Engraved by J.W. Lowry.",
+    "publishers": [{
+        "wikidata_qid": "Q15259326",
+        "name": "John William Parker",
+        "location": {
+            "wikidata_qid": "Q84",
+            "name": "London",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": "63x71 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990028104200205171/NLI#$FL10591189",
+        "code": "990028104200205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q15973008",
+        "name": "George Williams",
+        "new_entity": false
+    },
+    {
+        "wikidata_qid": "Q4470020",
+        "name": "Robert Willis",
+        "new_entity": false
+    }
+    ],
+    "engravers": [{
+        "wikidata_qid": "Q6288013",
+        "name": "Joseph Wilson Lowry",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q75754011",
+        "name": "Edward Aldrich",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q75754011",
+        "name": "John Frederick Anthony Symonds",
+        "new_entity": true
+        }
+    ],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1841-03-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1849-03-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "The Holy City: Historical, Topographical, and Antiquarian Notices of Jerusalem, Volume 1",
+            "authors": [{
+                "wikidata_qid": "Q15973008",
+                "name": "George Williams",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1849-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q15259326",
+                "name": "John William Parker",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q18526835",
+                "name": "John Deighton",
+                "location": {
+                    "wikidata_qid": "Q350",
+                    "name": "Cambridge",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }
+            ],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_aldrich_symonds/book/1849_williams_book_second_ed.pdf",
+            "google_books_url": "https://books.google.ch/books?id=T_sqAAAAYAAJ&printsec=frontcover&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1841_aldrich_symonds/aldrich_symonds_1841.jpeg"
+}
+  

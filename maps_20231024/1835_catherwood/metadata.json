@@ -1,0 +1,78 @@
+{
+    "title": "Plan of Jerusalem / By F.Catherwood. S.Bellin sculp.",
+    "publishers": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "location": {
+            "wikidata_qid": "Q84",
+            "name": "London",
+            "new_entity": false
+        },
+        "new_entity": false
+    }],
+    "paper_extent": null,
+    "scale": "1:9600",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_MAPS_JER997009584089605171/NLI#$FL165906236",
+        "code": "997009584089605171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q7410900",
+        "name": "Samuel Bellin",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q33567",
+        "name": "Frederick Catherwood",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1835-07-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1835-08-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Travels in Egypt, Arabia Petræa, and the Holy Land, Volume 2",
+            "authors": [{
+                "wikidata_qid": "Q12064775",
+                "name": "Stephen Olin",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1843-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q3127696",
+                "name": "Harper & brothers",
+                "location": {
+                    "wikidata_qid": "Q60",
+                    "name": "New York",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1835_catherwood/book/1843_olin.pdf"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1835_catherwood/catherwood_1835.jpeg"
+}
+  

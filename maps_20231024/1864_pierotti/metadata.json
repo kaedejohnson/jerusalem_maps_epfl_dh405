@@ -1,0 +1,75 @@
+{
+    "title": "Plan of modern Jerusalem.",
+    "paper_extent": null,
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/archives/NNL_ARCHIVE_AL997012428032405171/NLI#$FL207855777",
+        "code": "997012428032405171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q7931687",
+        "name": "Day & Son",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q7004397",
+        "name": "Ermete Pierotti",
+        "new_entity": false
+        }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1864-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Jerusalem Explored: Being a Description of the Ancient and Modern City, with Numerous Illustrations Consisting of Views, Ground Plans, and Sections",
+            "authors": [{
+                "wikidata_qid": "Q7004397",
+                "name": "Ermete Pierotti",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1864-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q5536864",
+                "name": "Bell and Daldy",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            },
+            {
+                "wikidata_qid": "Q117019928",
+                "name": "Deighton, Bell and Co.",
+                "location": {
+                    "wikidata_qid": "Q350",
+                    "name": "Cambridge",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1864_pierotti/book/1864_pierotti.pdf",
+            "google_books_url": "https://books.google.it/books?id=K7GHEV-Ql1EC&printsec=frontcover&hl=it&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1864_pierotti/pierotti_1864.jpeg"
+}
+  

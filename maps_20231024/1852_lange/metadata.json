@@ -1,0 +1,90 @@
+{
+    "title": "Skizze eines Grundrisses von Jerusalem / Gezeichnet von H.Lange Lith. Anst.v.L.Kraatz in Berlin.",
+    "paper_extent": "27.6x26.3 cm",
+    "scale": "1:9600",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_MAPS_JER990023698050205171/NLI",
+        "code": "990023698050205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q73364",
+        "name": "Henry Lange",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q53503357",
+        "name": "Leopold Kraatz",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1852-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Die Erdkunde im Verhältniß zur Natur und zur Geschichte des Menschen, Oder allgemeine, vergleichende Geographie als sichere Grundlage des Studiums und Unterrichts in physikalischen und historischen Wissenschaften. Palästina und Syrien : mit einem Plan von Jerusalem und einer Karte von Galiläa. 16 Theil",
+            "authors": [{
+                "wikidata_qid": "Q29297",
+                "name": "Carl Ritter",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1852-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q2516675",
+                "name": "Verlag Georg Reimer",
+                "location": {
+                    "wikidata_qid": "Q64",
+                    "name": "Berlin",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1852_lange/book/1852_ritter.pdf",
+            "google_books_url": "https://www.google.ch/books/edition/Die_Erdkunde_im_Verh%C3%A4ltni%C3%9F_zur_Natur_u/WUOGTUSdqoEC?hl=it&gbpv=0"
+        }],
+        "translations": [
+            {
+            "title": "The Comparative Geography of Palestine and the Sinaitic Peninsula, Volume 4",
+            "authors": [{
+                "wikidata_qid": "Q29297",
+                "name": "Carl Ritter",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1866-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q2516675",
+                "name": "T & T Clark",
+                "location": {
+                    "wikidata_qid": "Q64",
+                    "name": "Edinburgh",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1852_lange/book/1852_ritter_en.pdf",
+            "google_books_url": "https://books.google.it/books?id=Q8qXr3yVwF4C&printsec=frontcover&hl=it&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+            }
+        ]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1852_lange/lange_1852.jpg"
+}
+  

@@ -1,0 +1,99 @@
+{
+    "title": "Ordnance Survey of Jerusalem / By Captain W. Wilson, R.E. under the direction of Colonel Sir Henry James...1864-5. Engraved at the Ordnance Survey Office, Southampton under the direction of Colonel J. Cameron, R.E.",
+    "paper_extent": "100.5x71.0 cm",
+    "scale": "1:2500",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023682150205171/NLI#$FL47890686",
+        "code": "990023682150205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q612080",
+        "name": "Charles William Wilson",
+        "new_entity": false
+    }],
+    "engravers": [{
+        "wikidata_qid": "Q19370759",
+        "name": "John Cameron",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q612080",
+        "name": "Charles William Wilson",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q1606918",
+        "name": "Henry James",
+        "new_entity": false
+        },
+        {
+        "wikidata_qid": "Q0",
+        "name": "James McDonald",
+        "new_entity": true
+        },
+        {
+        "wikidata_qid": "Q0",
+        "name": "F. Ferris",
+        "new_entity": true
+        },
+        {
+        "wikidata_qid": "Q0",
+        "name": "J. McKeith",
+        "new_entity": true
+        },
+        {
+        "wikidata_qid": "Q0",
+        "name": "J. Davidson",
+        "new_entity": true
+        },
+        {
+        "wikidata_qid": "Q0",
+        "name": "T. Wishart",
+        "new_entity": true
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1865-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1866-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "English"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Ordnance Survey of Jerusalem, Volume 1",
+            "authors": [{
+                "wikidata_qid": "Q612080",
+                "name": "Charles William Wilson",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1866-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q5422976",
+                "name": "Eyre and Spottiswoode",
+                "location": {
+                    "wikidata_qid": "Q84",
+                    "name": "London",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "English"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1865_wilson/book/1865_wilson_book.pdf",
+            "google_books_url": "https://books.google.it/books?id=9HsYAQAAMAAJ&printsec=frontcover&hl=it&source=gbs_ge_summary_r&cad=0#v=onepage&q&f=false"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1865_wilson/wilson_1865.jpeg"
+}
+  

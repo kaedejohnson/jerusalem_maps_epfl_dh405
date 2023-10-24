@@ -1,0 +1,55 @@
+{
+    "title": "Grundriss von Jerusalem.",
+    "paper_extent": "30.0x24.5 cm",
+    "scale": null,
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_MAPS_JER997012124364605171/NLI#$FL203364610",
+        "code": "997012124364605171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q2087327",
+        "name": "Philipp Wolff",
+        "new_entity": false
+    }],
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1872-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Jerusalem : nach eigener Anschauung und den neuesten Forschungen geschildert / von Dr. Philipp Wolff.",
+            "authors": [{
+                "wikidata_qid": "Q2087327",
+                "name": "Philipp Wolff",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1872-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q42021405",
+                "name": "J.J. Weber",
+                "location": {
+                    "wikidata_qid": "Q2079",
+                    "name": "Leipzig",
+                    "new_entity": false
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1872_wolff/book/1872_wolff_book.pdf",
+            "google_books_url": "https://www.google.com/books/edition/_/iB5YAAAAcAAJ?gbpv=0"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1872_wolff/wolff_1872.jpeg"
+}
+  

@@ -1,0 +1,64 @@
+{
+    "title": "Rock site of Jerusalem : with existing Scarps and Ancien Ruins / entworfen von Claude R. Conder R.E. 1873.",
+    "paper_extent": "20.5x13.0 cm",
+    "scale": "1:10000",
+    "is_in_nli": true,
+    "nli": {
+        "url":"https://www.nli.org.il/en/maps/NNL_ALEPH990023680140205171/NLI#$FL184620963",
+        "code": "990023680140205171"
+    },
+    "mapmakers": [{
+        "wikidata_qid": "Q2497586",
+        "name": "Claude Conder",
+        "new_entity": false
+    }],
+    "surveyors": [{
+        "wikidata_qid": "Q2497586",
+        "name": "Claude Conder",
+        "new_entity": false
+        }],
+    "survey_date": {
+        "wikidata_property": "P585",
+        "date": "1873-01-01T00:00:00Z"
+    },
+    "publication_date": {
+        "wikidata_property": "P585",
+        "date": "1876-01-01T00:00:00Z"
+    },
+    "language": {
+        "wikidata_property": "P407",
+        "value": "German"
+    },
+    "related_books": {
+        "original_books": [{
+            "title": "Karten und Pläne zur Topographie des Alten Jerusalem",
+            "authors": [{
+                "wikidata_qid": "Q1147327",
+                "name": "Karl Zimmermann",
+                "new_entity": false
+            }],
+            "publication_date": {
+                "wikidata_property": "P585",
+                "date": "1876-01-01T00:00:00Z"
+                },
+            "publishers": [{
+                "wikidata_qid": "Q0",
+                "name": "Bahnmayer",
+                "location": {
+                    "wikidata_qid": "Q78",
+                    "name": "Basel",
+                    "new_entity": true
+                },
+                "new_entity": false
+            }],
+            "language": {
+                "wikidata_property": "P407",
+                "value": "German"
+            },
+            "book_path": null,
+            "google_books_url": "https://books.google.ch/books/about/Karten_und_Pl%C3%A4ne_zur_Topographie_des_al.html?id=7vb6zQEACAAJ&redir_esc=y"
+        }]
+    },
+    "image_path": "/Users/vaienti/Library/CloudStorage/OneDrive-epfl.ch/PHD_THESIS_MATERIAL/Jerusalem_Vectors/raster_cartography_new_selection/maps_original_files/1873_conder/conder_1873.jpeg"
+}
+  
