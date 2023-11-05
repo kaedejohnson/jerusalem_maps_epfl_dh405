@@ -153,21 +153,15 @@ if __name__ == "__main__":
         map_crops_topfolder = args.map_crops_topfolder
         map_streg_topfolder = args.map_streg_topfolder
         
-        full_map_subfolders = [os.path.join(root.replace("\\","/"), "") for root, dirs, files in os.walk(os.path.join(curr_wd, map_crops_topfolder))][1:]
-        in_paths_tmp = [os.path.join(subf, f).replace("\\","/") for subf in full_map_subfolders for f in os.listdir(subf)]
-        in_paths = [fp[0].upper() + fp[1:] for fp in in_paths_tmp]
-        out_paths_tmp = [os.path.join(map_streg_topfolder + subf.split('crops')[1], f) for subf in full_map_subfolders for f in os.listdir(subf)]
-        out_paths_tmp2 = [os.path.join(curr_wd, fp[0:fp.rfind("\\")]) + "/" for fp in out_paths_tmp]
-        out_paths_tmp3 = [fp.replace("\\","/") for fp in out_paths_tmp2]
-        out_paths = [fp[0].upper() + fp[1:] for fp in out_paths_tmp3]
-
-        [os.makedirs(op) for op in set(out_paths) if not os.path.isdir(op)]
+        in_out_pairs = []
+        for root, dirs, files in os.walk(map_crops_topfolder):
+            if len(files) > 0:
+                for i in range(len(files)):
+                    in_tmp = curr_wd + "/" + root.replace("\\","/") + "/" + files[i]
+                    out_tmp = in_tmp.replace(map_crops_topfolder,map_streg_topfolder).rsplit("/",1)[0]
+                    in_out_pairs.append([in_tmp, out_tmp])
+        #print(in_out_pairs[0])
         
-        in_out_pairs = list(zip(in_paths, out_paths))
-
-
-        #print(in_out_pairs)
-
         for pair in in_out_pairs:
             pair_input = pair[0]
             pair_output = pair[1]
