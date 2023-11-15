@@ -42,6 +42,6 @@ for i in range(image_preprocessor.num_layers):
     all_layer_offset_ys.extend(offset_ys)
 
     # If you want to draw for each layer, uncomment the following line
-    spotter.draw(os.path.join(test_folder, f'combined_tagged_{i}.png'))
+    #spotter.draw(os.path.join(test_folder, f'combined_tagged_{i}.png'))
 
 spotter.draw(os.path.join(test_folder, 'combined_tagged_all_layers.png'), draw_instances=all_layer_instances, draw_offset_xs=all_layer_offset_xs, draw_offset_ys=all_layer_offset_ys)
