@@ -160,7 +160,7 @@ if __name__ == "__main__":
                     in_tmp = curr_wd + "/" + root.replace("\\","/") + "/" + files[i]
                     out_tmp = in_tmp.replace(map_crops_topfolder,map_streg_topfolder).rsplit("/",1)[0]
                     in_out_pairs.append([in_tmp, out_tmp])
-        #print(in_out_pairs[0])
+        print(in_out_pairs[0])
         
         for pair in in_out_pairs:
             pair_input = pair[0]
@@ -172,6 +172,8 @@ if __name__ == "__main__":
                 pair_input = glob.glob(os.path.expanduser(pair_input[0]))
                 assert pair_input, "The input path(s) was not found"
             
+            if not os.path.isdir(pair_output):
+                os.makedirs(pair_output)
             pair_input = [pair_input]
             for path in tqdm.tqdm(pair_input, disable=not pair_output):
                 # use PIL, to be consistent with evaluatio
