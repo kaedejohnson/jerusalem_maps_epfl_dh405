@@ -32,10 +32,10 @@ class ImagePreprocessor:
 
         h_offsets = [i * grid_size_h for i in range(m)]
         w_offsets = [i * grid_size_w for i in range(m)]
-        for y in h_offsets:
-            for x in w_offsets:
-                patch = self.image.crop((y, x, y + patch_size, x + patch_size))
-                image_patches.append({'image': patch, 'offset_x': x, 'offset_y': y})
+        for h in h_offsets:
+            for w in w_offsets:
+                patch = self.image.crop((h, w, h + patch_size, w + patch_size))
+                image_patches.append({'image': patch, 'offset_x': h, 'offset_y': w})
         return image_patches
     
     def process(self, image: Image = None):
@@ -76,7 +76,7 @@ class ImagePreprocessor:
             image = patch['image']
             offset_x = patch['offset_x']
             offset_y = patch['offset_y']
-            image.save(os.path.join(folder_path, f'{layer}_{offset_x}_{offset_y}.png'))
+            image.save(os.path.join(folder_path, f'{layer}_{offset_y}_{offset_x}.png'))
         return
     
     def get_image_patches(self, layer):
