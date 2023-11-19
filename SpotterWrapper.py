@@ -156,19 +156,28 @@ class Spotter:
         return self.vis_final
     
 class PolygonVisualizer:
-    def __init__(self, image_batch:list, offset_xs:list, offset_ys:list):
+    def __init__(self):
+        self.canvas = None
+        self.cfg = get_cfg()
+        self.metadata = MetadataCatalog.get(
+            self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
+        )
+
+    def canvas_from_patches(self, image_batch:list, offset_xs:list, offset_ys:list):
         h = max([image.size[0] + offset_x for image, offset_x in zip(image_batch, offset_xs)])
         w = max([image.size[1] + offset_y for image, offset_y in zip(image_batch, offset_ys)])
         self.canvas = Image.new("RGB", (h,w))
         for image, offset_x, offset_y in zip(image_batch, offset_xs, offset_ys):
             self.canvas.paste(image, (offset_x, offset_y))
 
-        self.cfg = get_cfg()
-        self.metadata = MetadataCatalog.get(
-            self.cfg.DATASETS.TEST[0] if len(self.cfg.DATASETS.TEST) else "__unused"
-        )
+    def canvas_from_image(self, image:Image):
+        self.canvas = image.copy()
 
     def draw(self, json_list:list):
+        if self.canvas == None:
+            print("No canvas loaded.")
+            return
+        
         visualizer = TextVisualizer(self.canvas, self.metadata, instance_mode=ColorMode.IMAGE, cfg=self.cfg)
         for json in json_list:
             polygon_x = json["polygon_x"]

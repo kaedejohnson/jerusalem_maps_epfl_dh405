@@ -29,7 +29,11 @@ all_layer_results = []
 
 base_image_batch, base_offset_xs, base_offset_ys = image_preprocessor.get_image_patches(0)
 
-vis = PolygonVisualizer(base_image_batch,base_offset_xs,base_offset_ys)
+vis = PolygonVisualizer()
+
+vis.canvas_from_patches(base_image_batch, base_offset_xs, base_offset_ys)
+#or
+#vis.canvas_from_image(image)
 
 for i in range(image_preprocessor.num_layers):
     # If you want to save for each layer, uncomment the following line
