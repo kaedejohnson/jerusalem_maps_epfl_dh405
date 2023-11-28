@@ -36,7 +36,7 @@ vis.canvas_from_patches(base_image_batch, base_offset_xs, base_offset_ys)
 #vis.canvas_from_image(image)
 
 for i in range(image_preprocessor.num_layers):
-    # If you want to save for each layer, uncomment the following line
+    # If you want to save patches for each layer, uncomment the following line
     #image_preprocessor.save_patches(os.path.join(test_folder, f'layer_{i}_patches'), layer=i)
 
     image_batch, offset_xs, offset_ys = image_preprocessor.get_image_patches(i)
@@ -45,12 +45,18 @@ for i in range(image_preprocessor.num_layers):
 
     results = spotter.inference_batch()
 
+    print(results)
+
     all_layer_results.extend(results)
 
+    # If you want to save the tagged image for each layer, uncomment the following line
     #vis.draw(results).save(os.path.join(test_folder, f'combined_tagged_{i}.png'))
 
+    # If you want to save polygons in json for each layer, uncomment the following line
     vis.save_json(results, os.path.join(test_folder, f'combined_tagged_{i}.json'))
 
+# If you want to save the tagged image for all layers, uncomment the following line
 vis.draw(all_layer_results).save(os.path.join(test_folder, f'combined_tagged_all_layers.png'))
 
+# If you want to save polygons in json for all layers, uncomment the following line
 vis.save_json(all_layer_results, os.path.join(test_folder, f'combined_tagged_all_layers.json'))

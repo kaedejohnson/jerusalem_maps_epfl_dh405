@@ -68,9 +68,9 @@ with open('test/combined_tagged_all_layers.json', 'r', encoding='utf-8') as f:
 
     clustered = cluster_polygons(json.load(f))
 
-    # # visualize clusters
-    # image = visualize_polygons(clustered, 'test/combined.png')
-    # image.save('test/clustering.png')
+    # visualize clusters
+    image = visualize_polygons(clustered, 'test/combined.png')
+    image.save('test/clustering.png')
 
     with open('test/combined_tagged_all_layers_clustered.json', 'w', encoding='utf-8') as file:
         json.dump(clustered, file, ensure_ascii=False)
