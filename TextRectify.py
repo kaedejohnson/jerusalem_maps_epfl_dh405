@@ -42,12 +42,10 @@ class TextRectifier:
         if self.sample_size == 0:
             return
 
-        if self.do_ransac == False: # Maximum likelyhood
-            self.prediction = max(self.samples, key=lambda x:x['P'])['T']
-            self.inliers = [i for i in range(self.sample_size)]
-            return
+        self.prediction = max(self.samples, key=lambda x:x['P'])['T']
+        self.inliers = [i for i in range(self.sample_size)]
 
-        else:   
+        if self.do_ransac == True: # Maximum likelyhood
             i = 0
             self.inliers = []
             while i < self.max_iter:

@@ -1,6 +1,7 @@
 # Copyright (c) Facebook, Inc. and its affiliates. All Rights Reserved
 import os
-from PIL import Image
+from PIL import Image, ImageDraw
+import shapely as sh
 import torch
 
 from detectron2.data import MetadataCatalog
@@ -213,6 +214,54 @@ class PolygonVisualizer:
 
         return self.vis_final
     
+    def draw(self, polygon_list:list, text_list:list):
+        if self.canvas == None:
+            print("No canvas loaded.")
+            return
+        
+        visualizer = TextVisualizer(self.canvas, self.metadata, instance_mode=ColorMode.IMAGE, cfg=self.cfg)
+        for poly, text in zip(polygon_list, text_list):
+            color = (0.1, 0.2, 0.5)
+            alpha = 0.5
+            polygon = []
+            if isinstance(poly, sh.geometry.polygon.Polygon):
+                polygon_x = poly.exterior.coords.xy[0]
+                polygon_y = poly.exterior.coords.xy[1]
+                polygon = []
+                for x, y in zip(polygon_x, polygon_y):
+                    polygon.append([x, y])
+                visualizer.draw_polygon(polygon, color, alpha=alpha)
+            elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
+                for p in poly:
+                    polygon_x = p.exterior.coords.xy[0]
+                    polygon_y = p.exterior.coords.xy[1]
+                    polygon = []
+                    for x, y in zip(polygon_x, polygon_y):
+                        polygon.append([x, y])
+                    visualizer.draw_polygon(polygon, color, alpha=alpha)
+            # draw text in the top left corner
+            
+            text = "{}".format(text)
+            lighter_color = visualizer._change_color_brightness(color, brightness_factor=0.7)
+            text_pos = polygon[0]
+            horiz_align = "left"
+            font_size = visualizer._default_font_size * 0.2
+
+            visualizer.draw_text(
+                text,
+                text_pos,
+                color=lighter_color,
+                horizontal_alignment=horiz_align,
+                font_size=font_size,
+                draw_chinese=False if visualizer.voc_size == visualizer.custom_VOC_SIZE else True
+            )
+
+        vis_image = visualizer.output.get_image()
+        self.vis_final = Image.fromarray(vis_image)
+
+        return self.vis_final
+    
+
     def save(self, output_path):
         self.vis_final.save(output_path)
         return
