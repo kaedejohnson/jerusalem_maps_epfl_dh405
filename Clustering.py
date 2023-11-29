@@ -52,6 +52,7 @@ def cluster_polygons(p_labels):
     new_label = len(set(c_labels)) - 1
     for i, c_label in enumerate(c_labels):
         if c_label == -1:
+            continue
             clustered[str(new_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
                                             'polygon_y': p_labels['polygon_y'][str(i)],
                                             'text': p_labels['text'][str(i)],

@@ -214,7 +214,7 @@ class PolygonVisualizer:
 
         return self.vis_final
     
-    def draw(self, polygon_list:list, text_list:list):
+    def draw_poly(self, polygon_list:list, text_list:list):
         if self.canvas == None:
             print("No canvas loaded.")
             return

@@ -1,6 +1,6 @@
 import os
 from PIL import Image
-
+import numpy as np
 
 class ImagePreprocessor:
     def __init__(self, image: Image, overlapping_tolerance = 0.2, num_layers = 3, min_patch_resolution = 256, max_patch_resolution = 2048) -> None:
@@ -48,12 +48,14 @@ class ImagePreprocessor:
 
         min_patches_m = int(min_pixels/(self.max_patch_resolution * (1 + self.overlapping_tolerance))) + 1
 
+        max_patches_m = int(min_pixels/(self.min_patch_resolution * (1 - self.overlapping_tolerance))) + 1
+
         if min_patches_m < 3:
             min_patches_m = 3
 
         # Calculate the number of patches for each layer
-        patches_m = [int(min_patches_m * 2 ** i) for i in range(self.num_layers)]
-
+        patches_m = np.linspace(min_patches_m, max_patches_m, self.num_layers, dtype = int)
+        print("Cropping patches:", patches_m)
         # Crop the image into patches
         for i, m in enumerate(patches_m):
             image_patches = self.crop(m)
