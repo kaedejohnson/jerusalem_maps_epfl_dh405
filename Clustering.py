@@ -28,7 +28,10 @@ def visualize_polygons(clustered, img_path):
 
     # draw polygons
     for label, cluster in clustered.items():
-        color = label_to_color[label]
+        if label == "-1":
+            color = (23,56,78)
+        else:
+            color = label_to_color[label]
         pil_color = tuple(color)
         for polygon in cluster:
             draw.polygon(list(zip(polygon['polygon_x'], polygon['polygon_y'])), fill=pil_color, outline=pil_color)
@@ -47,19 +50,19 @@ def cluster_polygons(p_labels):
 
     clustered = {}
     for i, c_label in enumerate(c_labels):
-        if c_label == -1:
-            continue
+        #if c_label == -1:
+        #    continue
+        #else:
+        if str(c_label) not in clustered.keys():
+            clustered[str(c_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
+                                        'polygon_y': p_labels['polygon_y'][str(i)],
+                                        'text': p_labels['text'][str(i)],
+                                        'score': p_labels['score'][str(i)]}]
         else:
-            if str(c_label) not in clustered.keys():
-                clustered[str(c_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
+            clustered[str(c_label)].append({'polygon_x': p_labels['polygon_x'][str(i)],
                                             'polygon_y': p_labels['polygon_y'][str(i)],
                                             'text': p_labels['text'][str(i)],
-                                            'score': p_labels['score'][str(i)]}]
-            else:
-                clustered[str(c_label)].append({'polygon_x': p_labels['polygon_x'][str(i)],
-                                                'polygon_y': p_labels['polygon_y'][str(i)],
-                                                'text': p_labels['text'][str(i)],
-                                                'score': p_labels['score'][str(i)]})
+                                            'score': p_labels['score'][str(i)]})
 
     return clustered
 
