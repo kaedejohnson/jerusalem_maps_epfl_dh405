@@ -49,20 +49,25 @@ def cluster_polygons(p_labels):
     c_labels = clustering.labels_
 
     clustered = {}
+    new_label = len(set(c_labels)) - 1
     for i, c_label in enumerate(c_labels):
-        #if c_label == -1:
-        #    continue
-        #else:
-        if str(c_label) not in clustered.keys():
-            clustered[str(c_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
-                                        'polygon_y': p_labels['polygon_y'][str(i)],
-                                        'text': p_labels['text'][str(i)],
-                                        'score': p_labels['score'][str(i)]}]
-        else:
-            clustered[str(c_label)].append({'polygon_x': p_labels['polygon_x'][str(i)],
+        if c_label == -1:
+            clustered[str(new_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
                                             'polygon_y': p_labels['polygon_y'][str(i)],
                                             'text': p_labels['text'][str(i)],
-                                            'score': p_labels['score'][str(i)]})
+                                            'score': p_labels['score'][str(i)]}]
+            new_label += 1
+        else:
+            if str(c_label) not in clustered.keys():
+                clustered[str(c_label)] = [{'polygon_x': p_labels['polygon_x'][str(i)],
+                                            'polygon_y': p_labels['polygon_y'][str(i)],
+                                            'text': p_labels['text'][str(i)],
+                                            'score': p_labels['score'][str(i)]}]
+            else:
+                clustered[str(c_label)].append({'polygon_x': p_labels['polygon_x'][str(i)],
+                                                'polygon_y': p_labels['polygon_y'][str(i)],
+                                                'text': p_labels['text'][str(i)],
+                                                'score': p_labels['score'][str(i)]})
 
     return clustered
 
