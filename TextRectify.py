@@ -75,13 +75,19 @@ class TextRectifier:
     
     def get_rectified_text(self):
         ret = []
+        mask = [0 for i in range(self.sample_size)]
         if self.ignore_inliers:
-            return [self.prediction for i in range(self.sample_size)]
+            mask[0] = 1
+            return [self.prediction for i in range(self.sample_size)], mask
 
+        has_inlier = False
         for i in range(self.sample_size):
             if i in self.inliers:
                 ret.append(self.prediction)
+                mask[i] = int(not has_inlier)
+                has_inlier = True
             else:
                 ret.append(self.raw_data['text'][i])
+                mask[i] = 1
 
-        return ret
+        return ret, mask

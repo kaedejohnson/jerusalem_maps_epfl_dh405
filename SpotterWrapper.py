@@ -3,6 +3,7 @@ import os
 from PIL import Image, ImageDraw
 import shapely as sh
 import torch
+import numpy as np
 
 from detectron2.data import MetadataCatalog
 from detectron2.utils.visualizer import ColorMode
@@ -214,12 +215,13 @@ class PolygonVisualizer:
 
         return self.vis_final
     
-    def draw_poly(self, polygon_list:list, text_list:list):
+    def draw_poly(self, polygon_list:list, text_list:list, PCA_feature_list:list):
         if self.canvas == None:
             print("No canvas loaded.")
             return
         
         visualizer = TextVisualizer(self.canvas, self.metadata, instance_mode=ColorMode.IMAGE, cfg=self.cfg)
+        i = 0
         for poly, text in zip(polygon_list, text_list):
             color = (0.1, 0.2, 0.5)
             alpha = 0.5
@@ -256,6 +258,20 @@ class PolygonVisualizer:
                 draw_chinese=False if visualizer.voc_size == visualizer.custom_VOC_SIZE else True
             )
 
+            if PCA_feature_list != None:
+                for PCA_dict in PCA_feature_list[i]:
+                    color_pca = (0.5, 0.2, 0.1)
+                    centroid = np.array(PCA_dict["Centroid"])
+                    Var = np.array(PCA_dict["PCA_Var"])
+                    Std_var = np.sqrt(Var)
+                    Basis1 = np.array(PCA_dict["PCA_Basis"][0])
+                    Basis2 = np.array(PCA_dict["PCA_Basis"][1])
+                    
+                    polygon = [centroid, centroid + Basis1 * Std_var[0], centroid + Basis1 + Basis2, centroid + Basis2 * Std_var[1]]
+                    visualizer.draw_polygon(polygon, color_pca, alpha=1)
+
+
+            i += 1
         vis_image = visualizer.output.get_image()
         self.vis_final = Image.fromarray(vis_image)
 

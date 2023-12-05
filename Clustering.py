@@ -39,11 +39,11 @@ def visualize_polygons(clustered, img_path):
     return image
 
 
-def cluster_polygons(p_labels, conf_threshold):
+def cluster_polygons(p_labels, conf_threshold = 0):
 
     features = []
     for i in range(len(p_labels['polygon_x'])):
-        if p_labels['score'] > conf_threshold:
+        #if p_labels['score'] > conf_threshold:
             features.append(get_feature(p_labels['polygon_x'][str(i)], p_labels['polygon_y'][str(i)]))
 
     clustering = DBSCAN(eps=50, min_samples=3).fit(np.array(features))
@@ -74,13 +74,13 @@ def cluster_polygons(p_labels, conf_threshold):
     return clustered
 
 
-with open('test/combined_tagged_all_layers.json', 'r', encoding='utf-8') as f:
+#with open('test/combined_tagged_all_layers.json', 'r', encoding='utf-8') as f:
 
-    clustered = cluster_polygons(json.load(f), conf_threshold=.5)
+#    clustered = cluster_polygons(json.load(f), conf_threshold=.5)
 
-    # visualize clusters
-    image = visualize_polygons(clustered, 'test/combined.png')
-    image.save('test/clustering.png')
+#    # visualize clusters
+#    image = visualize_polygons(clustered, 'test/combined.png')
+#    image.save('test/clustering.png')
 
-    with open('test/combined_tagged_all_layers_clustered.json', 'w', encoding='utf-8') as file:
-        json.dump(clustered, file, ensure_ascii=False)
+#    with open('test/combined_tagged_all_layers_clustered.json', 'w', encoding='utf-8') as file:
+#        json.dump(clustered, file, ensure_ascii=False)
