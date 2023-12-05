@@ -1,7 +1,33 @@
 import numpy as np
 from sklearn.decomposition import PCA
 import shapely as sh
+from shapely.geometry import Polygon, Point
+from shapely.ops import triangulate
 from itertools import combinations
+import random
+
+def generate_samples(polygon, num_samples):
+    triangles = triangulate(polygon)
+    triangle_areas = [triangle.area for triangle in triangles]
+    total_area = sum(triangle_areas)
+    probabilities = [area / total_area for area in triangle_areas]
+    
+    samples = []
+    for _ in range(num_samples):
+        selected_triangle = random.choices(triangles, probabilities)[0]
+        alpha = random.uniform(0, 1)
+        beta = random.uniform(0, 1 - alpha)
+        x_coords = selected_triangle.exterior.coords.xy[0][:3]
+        y_coords = selected_triangle.exterior.coords.xy[1][:3]
+        coords = np.array([[x, y] for x, y in zip(x_coords, y_coords)])
+        point = (
+            (1 - alpha - beta) * coords[0] +
+            alpha * coords[1] +
+            beta * coords[2]
+        )
+        samples.append(point)
+
+    return samples
 
 def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
     PCA_features = []
@@ -11,20 +37,22 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
             polygon_x = poly.exterior.coords.xy[0]
             polygon_y = poly.exterior.coords.xy[1]
             for x, y in zip(polygon_x, polygon_y):
-                raw_coords.append([x, y])
+                raw_coords.append(np.array([x, y]))
         elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
             for p in poly:
                 polygon_x = p.exterior.coords.xy[0]
                 polygon_y = p.exterior.coords.xy[1]
                 for x, y in zip(polygon_x, polygon_y):
-                    raw_coords.append([x, y])
+                    raw_coords.append(np.array([x, y]))
         
         coords = raw_coords
         if enhance_coords == True: # Try to sample in the whole polygon
-            for a, b in combinations(raw_coords, 2):
-                coords.append([(a[0] + b[0])/2.0, (a[1] + b[1])/2.0])
-                coords.append([(a[0] + 2*b[0])/3.0, (a[1] + 2*b[1])/3.0])
-                coords.append([(2*a[0] + b[0])/3.0, (2*a[1] + b[1])/3.0])
+            #samples = generate_samples(Polygon(coords), 200)
+            #coords = samples
+            for a, b in combinations(coords, 2):
+                coords.append((a + b) / 2)
+                coords.append((a + 2*b) / 3)
+                coords.append((2*a + b) / 3)
 
         _pca = PCA(n_components = 2)
         _pca.fit(coords)
