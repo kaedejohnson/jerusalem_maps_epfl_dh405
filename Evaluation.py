@@ -167,3 +167,11 @@ def text_compare(s1, s2):
     s1_lwr_26 = remove_non_alphabetical_characters_and_accents(s1)
     s2_lwr_26 = remove_non_alphabetical_characters_and_accents(s2)
     return edit_distance_similarity(s1_lwr_26, s2_lwr_26)
+
+def prec_rec(IoU_pairs, num_detected, num_gt):
+    IoU_pairs = pd.DataFrame(IoU_pairs, columns=['geo_IoU', 'spotter_txt', 'gt_txt'])
+    print("Avg of Geographic Precision: " + str(IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_detected))
+    print("Avg of Geographic Recall: " + str(IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_gt))
+    IoU_pairs['normalized_txt_similarity'] = IoU_pairs.apply(lambda row: text_compare(row['spotter_txt'], row['gt_txt']), axis=1)
+    print("Avg of Text Precision: " + str(IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_detected))
+    print("Avg of Text Recall: " + str(IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_gt))
