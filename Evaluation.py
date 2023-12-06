@@ -97,7 +97,9 @@ def remove_non_alphabetical_characters_and_accents(string):
     return string
 
 def retain_alphabetic_annotations_only(df):
+    df = df.copy()
     df.loc[:, 'drop_txt'] = 0
+    df = df.copy()
     df.loc[:, 'annotation_stripped'] = df['annotation'].apply(remove_non_alphabetical_characters_and_accents)
     annotation_cond_ind = df['annotation_stripped'].str.len() == 0
     df.loc[annotation_cond_ind, 'drop_txt'] = 1
@@ -126,10 +128,10 @@ def maximize_1to1_IoU(IoU_matrix):
 
 def geographic_evaluation(map_name_in_strec, multiline_handling, coords, spotter_target = 'rectified'):
     left_x, right_x, top_y, bottom_y = coords[0], coords[1], coords[2], coords[3]
-    gt_labels_full = load_ground_truth_labels(map_name_in_strec, multiline_handling)
-    gt_labels_crop = retain_crop_coords_only(gt_labels_full, left_x, right_x, top_y, bottom_y)
+    gt_labels_full = load_ground_truth_labels(map_name_in_strec, multiline_handling) # Evaluation.load_ground_truth_labels(map_name_in_strec, "components")
+    gt_labels_crop = retain_crop_coords_only(gt_labels_full, left_x, right_x, top_y, bottom_y) 
     gt_labels_crop = retain_alphabetic_annotations_only(gt_labels_crop)
-    gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop)
+    gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop) #ExtractHandling.cast_coords_as_Polygons(gt_labels_full)
 
     if spotter_target == 'rectified':
         spotter_labels_full = ExtractHandling.load_rectified_polygons(map_name_in_strec)
