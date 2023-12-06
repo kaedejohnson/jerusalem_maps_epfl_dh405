@@ -4,6 +4,8 @@ from shapely.geometry import Polygon, MultiPolygon
 from collections import Counter
 import json 
 from itertools import combinations
+import ExtractHandling
+import numpy as np
 
 # Compared extracted labels to ground truth
 
@@ -116,6 +118,29 @@ def maximize_1to1_IoU(IoU_matrix):
     row_ind, col_ind = scipy.optimize.linear_sum_assignment(IoUs_only, maximize=True)
     IoU_pairs = IoU_matrix[row_ind, col_ind]
     return IoU_pairs
+
+def geographic_evaluation(map_name_in_strec, multiline_handling, coords, spotter_target = 'rectified'):
+    left_x, right_x, top_y, bottom_y = coords[0], coords[1], coords[2], coords[3]
+    gt_labels_full = load_ground_truth_labels(map_name_in_strec, multiline_handling)
+    gt_labels_crop = retain_crop_coords_only(gt_labels_full, left_x, right_x, top_y, bottom_y)
+    gt_labels_crop = retain_alphabetic_annotations_only(gt_labels_crop)
+    gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop)
+
+    if spotter_target == 'rectified':
+        spotter_labels_full = ExtractHandling.load_rectified_polygons(map_name_in_strec)
+        spotter_labels_crop = retain_crop_polygons_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+    else:
+        spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, spotter_target)
+        spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+        spotter_labels_crop = ExtractHandling.cast_coords_as_Polygons(spotter_labels_crop)
+        spotter_labels_crop.rename(columns={'text': 'annotation'}, inplace=True)
+    spotter_labels_crop = retain_alphabetic_annotations_only(spotter_labels_crop)
+
+    IoU_matrix = calculate_IoU_matrix(list(spotter_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)), list(gt_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)))
+    num_detected = IoU_matrix.shape[0]
+    num_gt = IoU_matrix.shape[1]
+    IoU_pairs = maximize_1to1_IoU(IoU_matrix)
+    return num_detected, num_gt, IoU_pairs
 
 def edit_distance_similarity(word1, word2):
     m, n = len(word1), len(word2)
