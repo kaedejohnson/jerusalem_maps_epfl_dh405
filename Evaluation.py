@@ -6,6 +6,10 @@ import json
 from itertools import combinations
 import ExtractHandling
 import numpy as np
+import pandas as pd
+import unidecode
+import re
+import scipy
 
 # Compared extracted labels to ground truth
 
@@ -94,8 +98,9 @@ def remove_non_alphabetical_characters_and_accents(string):
 
 def retain_alphabetic_annotations_only(df):
     df.loc[:, 'drop_txt'] = 0
-    df['annotation_stripped'] = df['annotation'].apply(remove_non_alphabetical_characters_and_accents)
-    df.loc[df['annotation_stripped'].str.len() == 0, 'drop_txt'] = 1
+    df.loc[:, 'annotation_stripped'] = df['annotation'].apply(remove_non_alphabetical_characters_and_accents)
+    annotation_cond_ind = df['annotation_stripped'].str.len() == 0
+    df.loc[annotation_cond_ind, 'drop_txt'] = 1
     df = df[df['drop_txt'] == 0]
     print("retaining " + str(len(df)) + " labels that have alphabetic characters")
     return df
