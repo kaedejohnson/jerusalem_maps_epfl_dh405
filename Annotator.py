@@ -37,7 +37,7 @@ def on_button_cancel_click(event):
         json.dump(json_dict, f)
     plt.close()
 
-starting_num = 916 # start at 916 i zoned out on the higher ones
+starting_num = 1400
 
 j = 0
 for image1, image2 in combinations(images, 2):
