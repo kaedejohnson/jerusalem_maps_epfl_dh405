@@ -37,7 +37,7 @@ def on_button_cancel_click(event):
         json.dump(json_dict, f)
     plt.close()
 
-starting_num = 1900
+starting_num = 2330
 
 j = 0
 for image1, image2 in combinations(images, 2):
