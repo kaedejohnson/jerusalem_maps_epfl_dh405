@@ -37,7 +37,9 @@ def on_button_cancel_click(event):
         json.dump(json_dict, f)
     plt.close()
 
-starting_num = 2370
+starting_num = 2370 # i finished, this was my last start
+# 1. i relaxed a bit after the first few hundred
+# 2. i don't believe my standards for cursive similarity were consistent
 
 j = 0
 for image1, image2 in combinations(images, 2):
