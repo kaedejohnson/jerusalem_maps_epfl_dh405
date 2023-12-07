@@ -42,12 +42,10 @@ class TextRectifier:
         if self.sample_size == 0:
             return
 
-        if self.do_ransac == False: # Maximum likelyhood
-            self.prediction = max(self.samples, key=lambda x:x['P'])['T']
-            self.inliers = [i for i in range(self.sample_size)]
-            return
+        self.prediction = max(self.samples, key=lambda x:x['P'])['T']
+        self.inliers = [i for i in range(self.sample_size)]
 
-        else:   
+        if self.do_ransac == True: # Maximum likelyhood
             i = 0
             self.inliers = []
             while i < self.max_iter:
@@ -77,13 +75,19 @@ class TextRectifier:
     
     def get_rectified_text(self):
         ret = []
+        mask = [0 for i in range(self.sample_size)]
         if self.ignore_inliers:
-            return [self.prediction for i in range(self.sample_size)]
+            mask[0] = 1
+            return [self.prediction for i in range(self.sample_size)], mask
 
+        has_inlier = False
         for i in range(self.sample_size):
             if i in self.inliers:
                 ret.append(self.prediction)
+                mask[i] = int(not has_inlier)
+                has_inlier = True
             else:
                 ret.append(self.raw_data['text'][i])
+                mask[i] = 1
 
-        return ret
+        return ret, mask

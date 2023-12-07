@@ -1,2 +1,6 @@
 # Ignore files in .\test
 .\test\*
+*.gz
+*.png
+*.png
+*.png
