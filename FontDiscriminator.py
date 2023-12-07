@@ -8,7 +8,7 @@ from torch.utils.data import random_split
 import torch.nn as nn
 import torch.nn.functional as F
 from sklearn.metrics import confusion_matrix
-
+import numpy as np
 
 with open("dependencies/ground_truth_labels/ground_truth_labels.json", "r", encoding="utf-8") as f:
     data_list = json.load(f)["data"]
@@ -93,7 +93,7 @@ print(f'Using device: {device}')
 model.to(device)
 
 # Training loop
-num_epochs = 10
+num_epochs = 80
 for epoch in range(num_epochs):
     model.train()  # Set the model to training mode
     for img1, img2, labels in train_loader:
@@ -106,20 +106,30 @@ for epoch in range(num_epochs):
         optimizer.step()
     print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item()}')
 
-    # Evaluation with Confusion Matrix
-    model.eval()
-    all_labels = []
-    all_predictions = []
+    if (epoch + 1) % 10 == 0:
+        # Evaluation with Confusion Matrix
+        model.eval()
+        all_labels = []
+        all_predictions = []
 
-    with torch.no_grad():
-        for img1, img2, labels in test_loader:
-            img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
-            outputs = model(img1, img2)
-            outputs = outputs.squeeze()
-            predicted = (outputs > 0.5).float()
+        with torch.no_grad():
+            for img1, img2, labels in test_loader:
+                img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
+                outputs = model(img1, img2)
+                outputs = outputs.squeeze()
+                predicted = (outputs > 0.5).float()
 
-            all_labels.extend(labels.cpu().numpy())
-            all_predictions.extend(predicted.cpu().numpy())
+                all_labels.extend(labels.cpu().numpy())
+                all_predictions.extend(predicted.cpu().numpy())
 
-    conf_matrix = confusion_matrix(all_labels, all_predictions)
-    print("Confusion Matrix:\n", conf_matrix)
+        conf_matrix = confusion_matrix(all_labels, all_predictions)
+        accu = np.trace(conf_matrix) / np.sum(conf_matrix)
+        # Accuracy
+        print("Accuracy:", accu)
+        # Precision
+        print("Precision:", conf_matrix[1, 1] / (conf_matrix[1, 1] + conf_matrix[0, 1]))
+        # Recall
+        print("Recall:", conf_matrix[1, 1] / (conf_matrix[1, 1] + conf_matrix[1, 0]))
+        # Confusion Matrix
+        print("Confusion Matrix:\n", conf_matrix)
+        torch.save(model.state_dict(), f"font_disc_weights/FontDiscriminator_{epoch + 1}_{accu * 100:.2f}.pth")
