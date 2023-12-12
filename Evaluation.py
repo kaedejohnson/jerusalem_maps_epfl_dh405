@@ -13,6 +13,15 @@ import scipy
 
 # Compared extracted labels to ground truth
 
+def aggregate_components_to_multiline(multiline_g):
+    return pd.Series({
+        'all_points_x': [point for sublist in multiline_g['all_points_x'] for point in sublist],
+        'all_points_y': [point for sublist in multiline_g['all_points_y'] for point in sublist],
+        'annotation': ' '.join(multiline_g['annotation']),
+        'annotation_length': sum(len(ann)+1 for ann in multiline_g['annotation']) - 1,
+        'index': multiline_g.index[0]
+    })
+
 def load_ground_truth_labels(map_name_in_strec, multiline_handling, labels_on_fullsize_map=True):
     with open('dependencies/ground_truth_labels/' + map_name_in_strec + '.json') as f:
         gt_labels_tmp = json.load(f)
@@ -26,19 +35,26 @@ def load_ground_truth_labels(map_name_in_strec, multiline_handling, labels_on_fu
             for obs in gt_labels_tmp[list(gt_labels_tmp.keys())[0]]['regions']
         ])
 
+    gt_labels['annotation_length'] = gt_labels['annotation'].apply(len)
+    tmp1 = gt_labels[~gt_labels['multiline_g'].apply(lambda x: pd.to_numeric(x, errors='coerce')).notnull()]
+    tmp1.loc[:, 'multiline_g'] = ""
+    tmp2 = gt_labels[gt_labels['multiline_g'].apply(lambda x: pd.to_numeric(x, errors='coerce')).notnull()]
+
+    # drop label that includes both components of full toponym (only present in kaede's gts)
+    if map_name_in_strec == "kiepert_1845":
+        tmp2 = tmp2.drop(tmp2.groupby('multiline_g')['annotation_length'].idxmax())
+    if map_name_in_strec == "saunders_1874":
+        to_drop = tmp2.groupby('multiline_g')['annotation_length'].idxmax()
+        ind_to_drop = to_drop[to_drop < 45]
+        tmp2 = tmp2.drop(ind_to_drop)
+
     if multiline_handling == 'largest':
-        gt_labels['annotation_length'] = gt_labels['annotation'].apply(len)
-        tmp1 = gt_labels[gt_labels['multiline_g'].isnull()]
-        tmp2 = gt_labels.dropna(subset=['multiline_g'])
-        gt_labels = pd.concat([tmp2.loc[tmp2.groupby('multiline_g')['annotation_length'].idxmax()], tmp1])
+        tmp2 = tmp2.groupby('multiline_g').apply(aggregate_components_to_multiline).reset_index().set_index('index')
+        return pd.concat([tmp2, tmp1]).sort_index()
     elif multiline_handling == 'components':
-        gt_labels['annotation_length'] = gt_labels['annotation'].apply(len)
-        tmp1 = gt_labels[gt_labels['multiline_g'].isnull()]
-        tmp2 = gt_labels.dropna(subset=['multiline_g'])
-        gt_labels = pd.concat([tmp2.loc[~tmp2.index.isin(tmp2.groupby('multiline_g')['annotation_length'].idxmax())], tmp1])
-    elif multiline_handling == 'none':
-        pass
-    return gt_labels
+        return pd.concat([tmp2, tmp1]).sort_index()
+
+
 
 ## Retain a subset of labels based on crop coordinates
 def coords_fail_condition(list, direction_for_drop, value, baseline):
