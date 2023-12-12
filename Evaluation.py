@@ -157,6 +157,8 @@ def geographic_evaluation(map_name_in_strec, multiline_handling, coords, spotter
     else:
         spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, spotter_target)
         spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+        if len(spotter_labels_crop) == 0:
+            return 0, gt_labels_crop, np.array([['0.0', 'shell', 'array']])
         spotter_labels_crop = ExtractHandling.cast_coords_as_Polygons(spotter_labels_crop)
         spotter_labels_crop.rename(columns={'text': 'annotation'}, inplace=True)
     spotter_labels_crop = retain_alphabetic_annotations_only(spotter_labels_crop)
