@@ -97,12 +97,11 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
 def crop_image_with_nabb(original_image, centroid, angle, expand_major, expand_minor):
     expand_major_rotated = np.array([expand_major * np.cos(np.deg2rad(angle)), expand_major * np.sin(np.deg2rad(angle))])
     expand_minor_rotated = np.array([expand_minor * np.sin(np.deg2rad(angle)), -expand_minor * np.cos(np.deg2rad(angle))])
-
     nabb_coordinates = [centroid + expand_major_rotated + expand_minor_rotated,
                         centroid - expand_major_rotated + expand_minor_rotated,
                         centroid - expand_major_rotated - expand_minor_rotated,
                         centroid + expand_major_rotated - expand_minor_rotated]
-    
+    nabb_coordinates = [x[0] for x in nabb_coordinates]
     # Create a shapely polygon from the NABB coordinates
     polygon = Polygon(nabb_coordinates)
 
@@ -159,6 +158,6 @@ def polygon_crop(poly, image, enhance_coords = True):
     UY = U[:, 1]
     expand_major = max(UX.max(), -UX.min())
     expand_minor = max(UY.max(), -UY.min())
-    centroid = np.array(poly.centroid)
+    centroid = np.array(poly.centroid.coords)
     angle = np.rad2deg(np.arctan2(C[0, 1], C[0, 0]))
     return crop_image_with_nabb(image, centroid, angle, expand_major, expand_minor)

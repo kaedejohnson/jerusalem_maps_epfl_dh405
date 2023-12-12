@@ -36,6 +36,8 @@ def load_ground_truth_labels(map_name_in_strec, multiline_handling, labels_on_fu
         tmp1 = gt_labels[gt_labels['multiline_g'].isnull()]
         tmp2 = gt_labels.dropna(subset=['multiline_g'])
         gt_labels = pd.concat([tmp2.loc[~tmp2.index.isin(tmp2.groupby('multiline_g')['annotation_length'].idxmax())], tmp1])
+    elif multiline_handling == 'none':
+        pass
     return gt_labels
 
 ## Retain a subset of labels based on crop coordinates
