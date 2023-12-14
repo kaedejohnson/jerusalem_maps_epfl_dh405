@@ -31,4 +31,3 @@ def prepare_labels_for_amalgamation(map_name_in_strec):
     df['labels'] = df.apply(lambda row: (row['label_polygons'], row['text']), axis=1)
     df = df[['labels']]
     return df
-
