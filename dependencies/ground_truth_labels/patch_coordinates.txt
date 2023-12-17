@@ -1,0 +1,9 @@
+saunders_patches = [{'left_x': 2350, 'right_x': 3850, 'top_y': 1750, 'bottom_y': 3250},
+                    {'left_x': 6450, 'right_x': 7500, 'top_y': 2200, 'bottom_y': 3250},
+                    {'left_x': 5400, 'right_x': 6400, 'top_y': 4500, 'bottom_y': 5500},
+                    {'left_x': 7650, 'right_x': 8650, 'top_y': 5400, 'bottom_y': 6400},
+                    {'left_x': 7650, 'right_x': 8650, 'top_y': 3150, 'bottom_y': 4150}]
+
+kiepert_patches = [{'left_x': 2475, 'right_x': 3550, 'top_y': 4775, 'bottom_y': 5850}]
+
+vandevelde_patches = [{'left_x': 2850, 'right_x': 5250, 'top_y': 1450, 'bottom_y': 3850}]
