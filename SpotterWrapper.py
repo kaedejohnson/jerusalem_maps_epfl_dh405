@@ -13,6 +13,7 @@ from adet.utils.visualizer import TextVisualizer
 from detectron2.data.detection_utils import _apply_exif_orientation, convert_PIL_to_numpy
 
 import pandas as pd
+import BezierSpline as BS
 
 def setup_cfg(args):
     # load config from file and command-line arguments
@@ -215,7 +216,7 @@ class PolygonVisualizer:
 
         return self.vis_final
     
-    def draw_poly(self, polygon_list:list, text_list:list, PCA_feature_list:list):
+    def draw_poly(self, polygon_list:list, text_list:list, PCA_feature_list:list, BSplines:list = None):
         if self.canvas == None:
             print("No canvas loaded.")
             return
@@ -272,6 +273,25 @@ class PolygonVisualizer:
 
 
             i += 1
+        if BSplines != None:
+            for spline in BSplines:
+                polygon = spline[0].get_as_polygon(8)
+                color_spline = (0.1, 0.5, 0.2)
+                visualizer.draw_polygon(polygon, color_spline, alpha=1)
+                text = f"{spline[1]:.3f}"
+                lighter_color = visualizer._change_color_brightness(color_spline, brightness_factor=0.7)
+                text_pos = polygon[3]
+                horiz_align = "left"
+                font_size = visualizer._default_font_size * 0.2
+                visualizer.draw_text(
+                    text,
+                    text_pos,
+                    color=lighter_color,
+                    horizontal_alignment=horiz_align,
+                    font_size=font_size,
+                    draw_chinese=False if visualizer.voc_size == visualizer.custom_VOC_SIZE else True
+                )
+
         vis_image = visualizer.output.get_image()
         self.vis_final = Image.fromarray(vis_image)
 

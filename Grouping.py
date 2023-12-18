@@ -58,14 +58,17 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
         _pca.fit(coords)
         V = _pca.explained_variance_
         C = _pca.components_
+        U = _pca.transform(coords)
+        UX = U[:, 0]
+        UY = U[:, 1]
+        expand_major = max(UX.max(), -UX.min())
+        expand_minor = max(UY.max(), -UY.min())
 
-        if (do_separation == False):
-            centroid = poly.centroid
-            PCA_features.append([{'Centroid': centroid,'PCA_Var': V, 'PCA_Basis': C}])
-        else:
+        centroid = np.array([poly.centroid.x, poly.centroid.y])
+        pca_feature:list = [{'Centroid': centroid, 'PCA_Var': V, 'PCA_Basis': C, 'PCA_Expands': np.array([expand_major, expand_minor])}]
+        if (do_separation == True):
             if V[0] < 4 * V[1]:
-                centroid = poly.centroid
-                PCA_features.append([{'Centroid': centroid,'PCA_Var': V, 'PCA_Basis': C}])
+                pass
             else:
                 U = _pca.transform(coords)[:, 0]
                 raw_A_coords = []
@@ -84,14 +87,27 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
                 V_A = _pca_A.explained_variance_
                 C_A = _pca_A.components_
                 centroid_A = np.mean(A_coords, axis=0)
+                U_A = _pca_A.transform(A_coords)
+                UX_A = U_A[:, 0]
+                UY_A = U_A[:, 1]
+                expand_major_A = max(UX_A.max(), -UX_A.min())
+                expand_minor_A = max(UY_A.max(), -UY_A.min())
 
                 _pca_B = PCA(n_components = 2)
                 _pca_B.fit(B_coords)
                 V_B = _pca_B.explained_variance_
                 C_B = _pca_B.components_
                 centroid_B = np.mean(B_coords, axis=0)
-                PCA_features.append([{'Centroid': centroid_B,'PCA_Var': V_B, 'PCA_Basis': C_B}, {'Centroid': centroid_A,'PCA_Var': V_A, 'PCA_Basis': C_A}])
-    
+                U_B = _pca_B.transform(B_coords)
+                UX_B = U_B[:, 0]
+                UY_B = U_B[:, 1]
+                expand_major_B = max(UX_B.max(), -UX_B.min())
+                expand_minor_B = max(UY_B.max(), -UY_B.min())
+
+                pca_feature.extend([{'Centroid': centroid_B,'PCA_Var': V_B, 'PCA_Basis': C_B, 'PCA_Expands': np.array([expand_major_B, expand_minor_B])}, {'Centroid': centroid_A,'PCA_Var': V_A, 'PCA_Basis': C_A,  'PCA_Expands': np.array([expand_major_A, expand_minor_A])}])
+        
+        PCA_features.append(pca_feature)
+
     return PCA_features
 
 def crop_image_with_nabb(original_image, centroid, angle, expand_major, expand_minor):
