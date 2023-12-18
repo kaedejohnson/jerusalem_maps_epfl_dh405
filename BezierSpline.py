@@ -21,8 +21,8 @@ class BezierSpline:
         self.calc_control_points()
 
     def calc_control_points(self):
-        prev_d = np.array([1, 0])
-        for i in range(0, len(self.directions)):
+        prev_d = np.array(self.directions[0])
+        for i in range(1, len(self.directions)):
             _d = np.array(self.directions[i])
             dot = np.dot(prev_d, _d)
             if dot < 0:

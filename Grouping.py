@@ -61,8 +61,8 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
         U = _pca.transform(coords)
         UX = U[:, 0]
         UY = U[:, 1]
-        expand_major = max(UX.max(), -UX.min())
-        expand_minor = max(UY.max(), -UY.min())
+        expand_major = 0.5 * (UX.max()-UX.min())
+        expand_minor = 0.5 * (UY.max()-UY.min())
 
         centroid = np.array([poly.centroid.x, poly.centroid.y])
         pca_feature:list = [{'Centroid': centroid, 'PCA_Var': V, 'PCA_Basis': C, 'PCA_Expands': np.array([expand_major, expand_minor])}]
@@ -90,8 +90,8 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
                 U_A = _pca_A.transform(A_coords)
                 UX_A = U_A[:, 0]
                 UY_A = U_A[:, 1]
-                expand_major_A = max(UX_A.max(), -UX_A.min())
-                expand_minor_A = max(UY_A.max(), -UY_A.min())
+                expand_major_A = 0.5 * (UX_A.max()-UX_A.min())
+                expand_minor_A = 0.5 * (UY_A.max()-UY_A.min())
 
                 _pca_B = PCA(n_components = 2)
                 _pca_B.fit(B_coords)
@@ -101,8 +101,8 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
                 U_B = _pca_B.transform(B_coords)
                 UX_B = U_B[:, 0]
                 UY_B = U_B[:, 1]
-                expand_major_B = max(UX_B.max(), -UX_B.min())
-                expand_minor_B = max(UY_B.max(), -UY_B.min())
+                expand_major_B = 0.5 * (UX_B.max()-UX_B.min())
+                expand_minor_B = 0.5 * (UY_B.max()-UY_B.min())
 
                 pca_feature.extend([{'Centroid': centroid_B,'PCA_Var': V_B, 'PCA_Basis': C_B, 'PCA_Expands': np.array([expand_major_B, expand_minor_B])}, {'Centroid': centroid_A,'PCA_Var': V_A, 'PCA_Basis': C_A,  'PCA_Expands': np.array([expand_major_A, expand_minor_A])}])
         

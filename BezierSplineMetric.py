@@ -2,7 +2,7 @@ from itertools import combinations
 import BezierSpline
 import numpy as np
 
-def calc_neighbours(polygons, PCA_features, radius_multiplier = 60):
+def calc_neighbours(polygons, PCA_features, radius_multiplier = 40, texts = None):
     neighbours = [[] for i in range(len(polygons))]
     multiplier = radius_multiplier
     for i, j in combinations(range(len(polygons)), 2):
@@ -20,7 +20,7 @@ def calc_neighbours(polygons, PCA_features, radius_multiplier = 60):
 
     return neighbours
 
-def spline_metric(polygons, PCA_features, neighbours):
+def spline_metric(polygons, PCA_features, neighbours, texts = None):
     b_splines = []
     all_splines = []
     scores = [{} for _ in range(len(polygons))]
@@ -36,6 +36,8 @@ def spline_metric(polygons, PCA_features, neighbours):
         min_cuvature = 10000000
         best_spline = None
         for j in neighbours[i]:
+            #if (i == 210 and j == 202) or (i == 202 and j == 210):
+            #    print("Found")
             pca_j = PCA_features[j]
             j_switchable = False
             if len(pca_j) == 3:
@@ -70,7 +72,7 @@ def spline_metric(polygons, PCA_features, neighbours):
                     spline_switch_both.from_pca(best_pair[0], best_pair[1], 1, 1, 1)
                     splines.append(spline_switch_both)
 
-                anchor_dist = np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
+                anchor_dist = 1 # np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
 
                 inner_min_cuvature = 10000000
                 for spline in splines:
@@ -91,10 +93,63 @@ def spline_metric(polygons, PCA_features, neighbours):
 
     return b_splines, all_splines, scores
 
-def get_distance_metric(score, i, j):
-    if score[i][j] != None:
+def get_distance_metric(score, i, j, infinitely_large_as):
+    i_has_j = False
+    j_has_i = False
+    if j in score[i].keys():
+        i_has_j = True
+    elif i in score[j].keys():
+        j_has_i = True
+
+    if i_has_j == True and j_has_i == True:
+        return min(score[i][j], score[j][i])
+    elif i_has_j == True:
         return score[i][j]
-    elif score[j][i] != None:
+    elif j_has_i == True:
         return score[j][i]
     else:
-        return 10000000
+        return infinitely_large_as # Infinitely large distance
+
+if __name__ == "__main__":
+    import SpotterWrapper
+    import Grouping
+    import pickle
+    from PIL import Image, ImageFile
+    
+    map_name_in_strec = "kiepert_1845"
+    df = pickle.load(open('processed/strec/' + map_name_in_strec + '/deduplicated_flattened_labels.pickle', 'rb'))
+
+    result = list(df["labels"])
+    polygons = []
+    texts = []
+    PCA_features = []
+
+    for i in range(len(result)):
+        poly = result[i][0]
+        polygons.append(poly)
+        texts.append(result[i][1])
+
+    PCA_features = Grouping.calc_PCA_feats(polygons, do_separation=True, enhance_coords=True)
+    print("PCA features calculated.")
+
+    # Calculate neighbours
+    neighbours = calc_neighbours(polygons, PCA_features, radius_multiplier = 40)
+    print("Neighbours found.")
+
+    # Calculate splines
+    b_splines, all_splines, scores = spline_metric(polygons, PCA_features, neighbours)
+    print("Splines calculated.")
+
+    # Get distance between polygon i and j
+    i = 259
+    j = 807
+    print(get_distance_metric(scores, i, j, infinitely_large_as=10000000))
+
+    # Draw splines
+    vis = SpotterWrapper.PolygonVisualizer()
+    canvas = Image.open(f'processed/strec/{map_name_in_strec}/raw.jpeg')
+    vis.canvas_from_image(canvas)
+
+    vis.draw_poly(polygons, texts, PCA_features, [sp for sp in all_splines if sp[1] < 0.5])
+
+    vis.save(f'processed/strec/{map_name_in_strec}/output.jpeg')

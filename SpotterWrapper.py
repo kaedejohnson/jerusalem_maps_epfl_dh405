@@ -244,14 +244,14 @@ class PolygonVisualizer:
                     visualizer.draw_polygon(polygon, color, alpha=alpha)
             # draw text in the top left corner
             
-            text = "{}".format(text)
+            _text = f"{i}:{text}"
             lighter_color = visualizer._change_color_brightness(color, brightness_factor=0.7)
             text_pos = polygon[0]
             horiz_align = "left"
             font_size = visualizer._default_font_size * 0.2
 
             visualizer.draw_text(
-                text,
+                _text,
                 text_pos,
                 color=lighter_color,
                 horizontal_alignment=horiz_align,
@@ -277,12 +277,12 @@ class PolygonVisualizer:
             for spline in BSplines:
                 polygon = spline[0].get_as_polygon(8)
                 color_spline = (0.1, 0.5, 0.2)
-                visualizer.draw_polygon(polygon, color_spline, alpha=1)
-                text = f"{spline[1]:.3f}"
                 lighter_color = visualizer._change_color_brightness(color_spline, brightness_factor=0.7)
-                text_pos = polygon[3]
+                visualizer.draw_polygon(polygon, lighter_color, alpha=1)
+                text = f"{spline[1]:.3f}"
+                text_pos = polygon[1]
                 horiz_align = "left"
-                font_size = visualizer._default_font_size * 0.2
+                font_size = visualizer._default_font_size * 0.1
                 visualizer.draw_text(
                     text,
                     text_pos,
