@@ -36,8 +36,6 @@ def spline_metric(polygons, PCA_features, neighbours, texts = None):
         min_cuvature = 10000000
         best_spline = None
         for j in neighbours[i]:
-            #if (i == 210 and j == 202) or (i == 202 and j == 210):
-            #    print("Found")
             pca_j = PCA_features[j]
             j_switchable = False
             if len(pca_j) == 3:
@@ -76,17 +74,22 @@ def spline_metric(polygons, PCA_features, neighbours, texts = None):
 
                 inner_min_cuvature = 10000000
                 for spline in splines:
-                    max_curvature = spline.get_max_curvature(20) * anchor_dist * spline.get_control_seg_length(0, 1) # Size invariant curvature with distance penalty
-                    if max_curvature < inner_min_cuvature:
-                        inner_min_cuvature = max_curvature
+                    max_curvature = spline.get_max_curvature(20)  # Size invariant curvature with distance penalty
+                    gap_penalty = spline.get_control_seg_length(0, 1)
+                    max_cost = max_curvature * anchor_dist * gap_penalty
+                    if max_cost < inner_min_cuvature:
+                        inner_min_cuvature = max_cost
                         inner_best_spline = spline
-                    all_splines.append([spline, max_curvature])
+                    all_splines.append([spline, max_cost])
 
                 if inner_min_cuvature < min_cuvature:
                     min_cuvature = inner_min_cuvature
                     best_spline = inner_best_spline
                 
                 scores[i][j] = min_cuvature
+                #if (i == 1026 and j == 1030) or (i == 1030 and j == 1026):
+                #    print(i, j)
+                #    best_spline.draw()
         
         if best_spline != None:
             b_splines.append([best_spline, min_cuvature])
@@ -132,6 +135,7 @@ if __name__ == "__main__":
     PCA_features = Grouping.calc_PCA_feats(polygons, do_separation=True, enhance_coords=True)
     print("PCA features calculated.")
 
+    Grouping.refine_PCA_basis(PCA_features, polygons)
     # Calculate neighbours
     neighbours = calc_neighbours(polygons, PCA_features, radius_multiplier = 40)
     print("Neighbours found.")

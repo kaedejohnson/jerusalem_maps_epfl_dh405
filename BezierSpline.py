@@ -21,21 +21,23 @@ class BezierSpline:
         self.calc_control_points()
 
     def calc_control_points(self):
-        prev_d = np.array(self.directions[0])
-        for i in range(1, len(self.directions)):
-            _d = np.array(self.directions[i])
-            dot = np.dot(prev_d, _d)
-            if dot < 0:
-                _d = -_d
-            prev_d = _d
-            self.directions[i] = _d
+        
 
         self.control_points = []
         for seg_id in range(0, len(self.points)-1):
             _p = []
+
+            p_direction = np.array(self.points[seg_id + 1]) - np.array(self.points[seg_id])
+            dir_prev = np.array(self.directions[seg_id])
+            if np.dot(p_direction, dir_prev) < 0:
+                dir_prev = -dir_prev
+            dir_next = np.array(self.directions[seg_id + 1])
+            if np.dot(p_direction, dir_next) < 0:
+                dir_next = -dir_next
+
             _p.append(self.points[seg_id])
-            _p.append([self.points[seg_id][0] + self.weights[seg_id] * self.directions[seg_id][0], self.points[seg_id][1] + self.weights[seg_id] * self.directions[seg_id][1]])
-            _p.append([self.points[seg_id + 1][0] - self.weights[seg_id] * self.directions[seg_id + 1][0], self.points[seg_id + 1][1] - self.weights[seg_id] * self.directions[seg_id + 1][1]])
+            _p.append([self.points[seg_id][0] + self.weights[seg_id] * dir_prev[0], self.points[seg_id][1] + self.weights[seg_id] * dir_prev[1]])
+            _p.append([self.points[seg_id + 1][0] - self.weights[seg_id] * dir_next[0], self.points[seg_id + 1][1] - self.weights[seg_id] * dir_next[1]])
             _p.append(self.points[seg_id + 1])
             self.control_points.append(np.array(_p))
 
@@ -67,6 +69,9 @@ class BezierSpline:
         return xx, yy
 
     def draw(self):
+        import matplotlib
+        matplotlib.use('TkAgg')
+        
         x = np.linspace(0, 1, self.draw_samples)
         xx = []
         yy = []
