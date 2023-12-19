@@ -308,7 +308,7 @@ def refine_PCA_basis(PCA_features, polygons):
             for x, y in zip(polygon_x, polygon_y):
                 raw_coords.append(np.array([x, y]))
         elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
-            for p in poly:
+            for p in poly.geoms: # kaede added: package discrepancy
                 polygon_x = p.exterior.coords.xy[0]
                 polygon_y = p.exterior.coords.xy[1]
                 for x, y in zip(polygon_x, polygon_y):

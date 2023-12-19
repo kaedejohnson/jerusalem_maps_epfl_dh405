@@ -4,14 +4,16 @@ import numpy as np
 import SpotterWrapper
 from PIL import Image, ImageFile
 
-def calc_neighbours(polygons, PCA_features, radius_multiplier = 40, texts = None):
-    neighbours = [[] for i in range(len(polygons))]
+def calc_neighbours(df, radius_multiplier = 40, texts = None):
+    pca_features = df['PCA_features']
+
+    neighbours = [[] for i in range(len(pca_features))]
     multiplier = radius_multiplier
-    for i, j in combinations(range(len(polygons)), 2):
-        c_i = PCA_features[i][0]['Centroid']
-        v_i = PCA_features[i][0]['PCA_Var'][1] + PCA_features[i][0]['PCA_Var'][0]
-        c_j = PCA_features[j][0]['Centroid']
-        v_j = PCA_features[j][0]['PCA_Var'][1] + PCA_features[j][0]['PCA_Var'][0]
+    for i, j in combinations(range(len(pca_features)), 2):
+        c_i = pca_features[i][0]['Centroid']
+        v_i = pca_features[i][0]['PCA_Var'][1] + pca_features[i][0]['PCA_Var'][0]
+        c_j = pca_features[j][0]['Centroid']
+        v_j = pca_features[j][0]['PCA_Var'][1] + pca_features[j][0]['PCA_Var'][0]
         
         dist_sqr = (c_i[0] - c_j[0])**2 + (c_i[1] - c_j[1])**2
 
@@ -19,15 +21,18 @@ def calc_neighbours(polygons, PCA_features, radius_multiplier = 40, texts = None
             neighbours[i].append(j)
         if dist_sqr < multiplier * v_j:
             neighbours[j].append(i)
+    df['neighbours'] = neighbours
+    return df
 
-    return neighbours
-
-def spline_metric(polygons, PCA_features, neighbours, texts = None):
+def spline_metric(df, texts = None):
     b_splines = []
     all_splines = []
-    scores = [{} for _ in range(len(polygons))]
-    for i in range(len(polygons)):
-        pca_i = PCA_features[i]
+    scores = []
+    pca_features = df['PCA_features']
+    neighbours = df['neighbours']
+
+    for i in range(len(pca_features)):
+        pca_i = pca_features[i]
         i_switchable = False
         if len(pca_i) == 3:
             pca_i = pca_i[1:]
@@ -37,8 +42,12 @@ def spline_metric(polygons, PCA_features, neighbours, texts = None):
 
         min_cuvature = 10000000
         best_spline = None
+
+        curr_i_score_dict = {}
+        curr_i_spline_list = []
+
         for j in neighbours[i]:
-            pca_j = PCA_features[j]
+            pca_j = pca_features[j]
             j_switchable = False
             if len(pca_j) == 3:
                 pca_j = pca_j[1:]
@@ -82,36 +91,49 @@ def spline_metric(polygons, PCA_features, neighbours, texts = None):
                     if max_cost < inner_min_cuvature:
                         inner_min_cuvature = max_cost
                         inner_best_spline = spline
-                    all_splines.append([spline, max_cost])
+                    curr_i_spline_list.append([spline, max_cost])
 
                 if inner_min_cuvature < min_cuvature:
                     min_cuvature = inner_min_cuvature
                     best_spline = inner_best_spline
                 
-                scores[i][j] = min_cuvature
+                curr_i_score_dict[j] = min_cuvature
+
                 #if (i == 1026 and j == 1030) or (i == 1030 and j == 1026):
                 #    print(i, j)
                 #    best_spline.draw()
-        
+
+        all_splines.append(curr_i_spline_list)
+        scores.append(curr_i_score_dict)
+
         if best_spline != None:
             b_splines.append([best_spline, min_cuvature])
+        else:
+            b_splines.append([None, -1])
 
-    return b_splines, all_splines, scores
+    #df['b_splines'] = b_splines
+    #df['all_splines'] = all_splines
+    df['scores'] = scores
+    
+    return df
 
-def get_distance_metric(score, i, j, infinitely_large_as):
+def get_distance_metric(df, i, j, infinitely_large_as):
     i_has_j = False
     j_has_i = False
-    if j in score[i].keys():
+
+    i_scores = df.loc[i]['scores']
+    j_scores = df.loc[j]['scores']
+    if j in i_scores.keys():
         i_has_j = True
-    elif i in score[j].keys():
+    elif i in j_scores.keys():
         j_has_i = True
 
     if i_has_j == True and j_has_i == True:
-        return min(score[i][j], score[j][i])
+        return min(i_scores[j], j_scores[i])
     elif i_has_j == True:
-        return score[i][j]
+        return i_scores[j]
     elif j_has_i == True:
-        return score[j][i]
+        return j_scores[i]
     else:
         return infinitely_large_as # Infinitely large distance
 
