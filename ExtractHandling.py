@@ -20,8 +20,11 @@ def cast_coords_as_Polygons(df):
     df_copy.loc[:, 'label_polygons'] = df.apply(lambda row: create_polygon_object(row['all_points_x'], row['all_points_y']), axis=1)
     return df_copy   
 
-def load_fully_processed_labels(map_name_in_strec):
-    df = pickle.load(open('processed/strec/' + map_name_in_strec + '/deduplicated_flattened_labels.pickle', 'rb'))
+def load_processed_labels(map_name_in_strec, methods):
+    if methods == "methods_1_2":
+        df = pickle.load(open('processed/strec/' + map_name_in_strec + '/deduplicated_flattened_labels.pickle', 'rb'))
+    elif methods == "methods_1_2_3":
+        df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels.pickle', 'rb'))
     df = pd.DataFrame(df['labels'].tolist(), columns=['label_polygons','annotation'])
     return df
 

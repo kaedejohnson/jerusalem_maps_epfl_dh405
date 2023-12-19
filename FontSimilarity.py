@@ -2,7 +2,9 @@ import torch
 from torchvision import transforms
 import torch.nn as nn
 import torch.nn.functional as F
-
+import os
+import Grouping
+from PIL import Image
 
 # Define the CNN architecture
 class SimpleCNN(nn.Module):
@@ -49,12 +51,16 @@ transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
-def font_sim(crop1, crop2):
+def font_sim(map_name_in_strec, i, j):
     '''
-    :param crop1: PIL Image Object
-    :param crop2: PIL Image Object
+    :param map_name_in_strec: map from which crops are compared, used for filepath
+    :param i: index of first crop, used for filepath
+    :param j: index of second crop, used for filepath
     :return: float from 0.0 to 1.0
     '''
+
+    crop1 = Image.open(f"extracted_crops/{map_name_in_strec}_" + str(i) + ".jpeg")
+    crop2 = Image.open(f"extracted_crops/{map_name_in_strec}_" + str(j) + ".jpeg")
 
     crop1 = transform(crop1).unsqueeze(0)
     crop2 = transform(crop2).unsqueeze(0)
@@ -68,3 +74,45 @@ def font_sim(crop1, crop2):
     output = output.item()
 
     return output
+
+def check_for_crop(df, i, map_name_in_strec):
+    if os.path.exists(f"extracted_crops/{map_name_in_strec}_" + str(i) + ".jpeg"):
+        pass
+    else:
+        img_tmp = Grouping.polygon_crop(df.iloc[i]['polygons'], Image.open("processed/strec/" + map_name_in_strec + "/raw.jpeg"))
+        img_tmp.save(f"extracted_crops/{map_name_in_strec}_" + str(i) + ".jpeg")
+
+def calc_font_similarities(df, map_name_in_strec):
+    f_sims = []
+    neighbours = df['neighbours']
+    for i in range(len(df)):
+        if len(neighbours[i]) > 0:
+            check_for_crop(df, i, map_name_in_strec)
+        curr_i_score_dict = {}
+        for j in neighbours[i]:
+            check_for_crop(df, j, map_name_in_strec)
+            curr_i_score_dict[j] = font_sim(map_name_in_strec, i , j)
+        f_sims.append(curr_i_score_dict)
+
+    df['font_scores'] = f_sims
+    return df
+
+def get_similarity_metric(df, i, j):
+    i_has_j = False
+    j_has_i = False
+
+    i_scores = df.loc[i]['font_scores']
+    j_scores = df.loc[j]['font_scores']
+    if j in i_scores.keys():
+        i_has_j = True
+    elif i in j_scores.keys():
+        j_has_i = True
+
+    if i_has_j == True and j_has_i == True:
+        return max(i_scores[j], j_scores[i])
+    elif i_has_j == True:
+        return i_scores[j]
+    elif j_has_i == True:
+        return j_scores[i]
+    else:
+        return 0

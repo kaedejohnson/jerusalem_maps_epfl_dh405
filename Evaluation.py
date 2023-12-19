@@ -138,7 +138,7 @@ def maximize_1to1_IoU(IoU_matrix):
     IoU_pairs = IoU_matrix[row_ind, col_ind]
     return IoU_pairs
 
-def geographic_evaluation(map_name_in_strec, multiline_handling, patches, spotter_target = 'fully_processed'):
+def geographic_evaluation(map_name_in_strec, multiline_handling, patches, methods = 'methods_1_2_3'):
 
     num_detected_tmp = []
     num_gt_tmp = []
@@ -151,16 +151,17 @@ def geographic_evaluation(map_name_in_strec, multiline_handling, patches, spotte
         gt_labels_crop = retain_alphabetic_annotations_only(gt_labels_crop)
         gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop) #ExtractHandling.cast_coords_as_Polygons(gt_labels_full)
 
-        if spotter_target == 'fully_processed':
-            spotter_labels_full = ExtractHandling.load_fully_processed_labels(map_name_in_strec)
-            spotter_labels_crop = retain_crop_polygons_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
-        else:
-            spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, spotter_target)
+        if methods == "methods_0":
+            spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, "combined_tagged_0.json")
             spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
             if len(spotter_labels_crop) == 0:
                 return 0, gt_labels_crop, np.array([['0.0', 'shell', 'array']])
             spotter_labels_crop = ExtractHandling.cast_coords_as_Polygons(spotter_labels_crop)
             spotter_labels_crop.rename(columns={'text': 'annotation'}, inplace=True)
+        else:
+            spotter_labels_full = ExtractHandling.load_processed_labels(map_name_in_strec, methods)
+            spotter_labels_crop = retain_crop_polygons_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+
         spotter_labels_crop = retain_alphabetic_annotations_only(spotter_labels_crop)
 
         IoU_matrix = calculate_IoU_matrix(list(spotter_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)), list(gt_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)))
