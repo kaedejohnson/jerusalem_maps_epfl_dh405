@@ -77,12 +77,15 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
                 pass
             else:
                 U = _pca.transform(coords)[:, 0]
+                U_max = max(U)
+                U_min = min(U)
+                threshold = (U_max + U_min) / 2
                 raw_A_coords = []
                 tail_length_A = []
                 raw_B_coords = []
                 tail_length_B = []
                 for coord, tl, u in zip(coords, tail_length, U):
-                    if u > 0:
+                    if u > threshold:
                         raw_A_coords.append(coord)
                         tail_length_A.append(tl)
                     else:
@@ -331,9 +334,9 @@ def refine_PCA_basis(PCA_features, polygons):
         weights = [ np.sqrt(np.linalg.norm(d)) for d in directions ]
         pricipal_components = PCA_features[poly_id][0]['PCA_Basis'][0]
         directions = [ d / np.linalg.norm(d) if d.dot(pricipal_components) >= 0 else -d / np.linalg.norm(d) for d in directions]
-        
+        initial_params = np.array([ pricipal_components[0], pricipal_components[1]])
+
         if len(PCA_features[poly_id]) == 1:
-            initial_params = np.array([ pricipal_components[0], pricipal_components[1]])
             init_theta = np.arctan2(initial_params[1], initial_params[0])
             
             result = solve_GM([init_theta], directions, weights)
