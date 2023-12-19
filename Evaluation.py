@@ -14,11 +14,14 @@ import scipy
 # Compared extracted labels to ground truth
 
 def aggregate_components_to_multiline(multiline_g):
+
+    longest_annotation = max(multiline_g['annotation'], key=len, default='')
+
     return pd.Series({
         'all_points_x': [point for sublist in multiline_g['all_points_x'] for point in sublist],
         'all_points_y': [point for sublist in multiline_g['all_points_y'] for point in sublist],
-        'annotation': ' '.join(multiline_g['annotation']),
-        'annotation_length': sum(len(ann)+1 for ann in multiline_g['annotation']) - 1,
+        'annotation': longest_annotation,
+        'annotation_length': len(longest_annotation),
         'index': multiline_g.index[0]
     })
 
@@ -36,25 +39,16 @@ def load_ground_truth_labels(map_name_in_strec, multiline_handling, labels_on_fu
         ])
 
     gt_labels['annotation_length'] = gt_labels['annotation'].apply(len)
-    tmp1 = gt_labels[~gt_labels['multiline_g'].apply(lambda x: pd.to_numeric(x, errors='coerce')).notnull()]
+    tmp1 = gt_labels[~gt_labels['multiline_g'].apply(lambda x: pd.to_numeric(x, errors='coerce')).notnull()].copy()
     tmp1.loc[:, 'multiline_g'] = ""
     tmp2 = gt_labels[gt_labels['multiline_g'].apply(lambda x: pd.to_numeric(x, errors='coerce')).notnull()]
-
-    # drop label that includes both components of full toponym (only present in kaede's gts)
-    if map_name_in_strec == "kiepert_1845":
-        tmp2 = tmp2.drop(tmp2.groupby('multiline_g')['annotation_length'].idxmax())
-    if map_name_in_strec == "saunders_1874":
-        to_drop = tmp2.groupby('multiline_g')['annotation_length'].idxmax()
-        ind_to_drop = to_drop[to_drop < 45]
-        tmp2 = tmp2.drop(ind_to_drop)
 
     if multiline_handling == 'largest':
         tmp2 = tmp2.groupby('multiline_g').apply(aggregate_components_to_multiline).reset_index().set_index('index')
         return pd.concat([tmp2, tmp1]).sort_index()
     elif multiline_handling == 'components':
+        tmp2 = tmp2.drop(tmp2.groupby('multiline_g')['annotation_length'].idxmax()) # drop "wrap-around" label
         return pd.concat([tmp2, tmp1]).sort_index()
-
-
 
 ## Retain a subset of labels based on crop coordinates
 def coords_fail_condition(list, direction_for_drop, value, baseline):
@@ -96,7 +90,7 @@ def retain_crop_coords_only(df, left_x, right_x, top_y, bottom_y):
     df['drop'] = df.apply(lambda row: coords_fail_condition(row['all_points_y'], '>', top_y, row['drop']), axis=1)
     df['drop'] = df.apply(lambda row: coords_fail_condition(row['all_points_y'], '<', bottom_y, row['drop']), axis=1)
     df = df[df['drop'] == 0]
-    print("retaining " + str(len(df)) + " labels fully inside crop area")
+    #print("retaining " + str(len(df)) + " labels fully inside crop area")
     return df
 
 def retain_crop_polygons_only(df, left_x, right_x, top_y, bottom_y):
@@ -106,7 +100,7 @@ def retain_crop_polygons_only(df, left_x, right_x, top_y, bottom_y):
     df['drop'] = df.apply(lambda row: polygon_fail_condition(row['label_polygons'], 1, '>', top_y, row['drop']), axis=1)
     df['drop'] = df.apply(lambda row: polygon_fail_condition(row['label_polygons'], 1, '<', bottom_y, row['drop']), axis=1)
     df = df[df['drop'] == 0]
-    print("retaining " + str(len(df)) + " labels fully inside crop area")
+    #print("retaining " + str(len(df)) + " labels fully inside crop area")
     return df
 
 def remove_non_alphabetical_characters_and_accents(string):
@@ -122,7 +116,7 @@ def retain_alphabetic_annotations_only(df):
     annotation_cond_ind = df['annotation_stripped'].str.len() == 0
     df.loc[annotation_cond_ind, 'drop_txt'] = 1
     df = df[df['drop_txt'] == 0]
-    print("retaining " + str(len(df)) + " labels that have alphabetic characters")
+    #print("retaining " + str(len(df)) + " labels that have alphabetic characters")
     return df
 
 ## Calculate and Match IoUs
@@ -144,29 +138,40 @@ def maximize_1to1_IoU(IoU_matrix):
     IoU_pairs = IoU_matrix[row_ind, col_ind]
     return IoU_pairs
 
-def geographic_evaluation(map_name_in_strec, multiline_handling, coords, spotter_target = 'rectified'):
-    left_x, right_x, top_y, bottom_y = coords[0], coords[1], coords[2], coords[3]
-    gt_labels_full = load_ground_truth_labels(map_name_in_strec, multiline_handling) # Evaluation.load_ground_truth_labels(map_name_in_strec, "components")
-    gt_labels_crop = retain_crop_coords_only(gt_labels_full, left_x, right_x, top_y, bottom_y) 
-    gt_labels_crop = retain_alphabetic_annotations_only(gt_labels_crop)
-    gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop) #ExtractHandling.cast_coords_as_Polygons(gt_labels_full)
+def geographic_evaluation(map_name_in_strec, multiline_handling, patches, spotter_target = 'fully_processed'):
 
-    if spotter_target == 'rectified':
-        spotter_labels_full = ExtractHandling.load_rectified_polygons(map_name_in_strec)
-        spotter_labels_crop = retain_crop_polygons_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
-    else:
-        spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, spotter_target)
-        spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
-        if len(spotter_labels_crop) == 0:
-            return 0, gt_labels_crop, np.array([['0.0', 'shell', 'array']])
-        spotter_labels_crop = ExtractHandling.cast_coords_as_Polygons(spotter_labels_crop)
-        spotter_labels_crop.rename(columns={'text': 'annotation'}, inplace=True)
-    spotter_labels_crop = retain_alphabetic_annotations_only(spotter_labels_crop)
+    num_detected_tmp = []
+    num_gt_tmp = []
+    IoU_pairs_tmp = []
 
-    IoU_matrix = calculate_IoU_matrix(list(spotter_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)), list(gt_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)))
-    num_detected = IoU_matrix.shape[0]
-    num_gt = IoU_matrix.shape[1]
-    IoU_pairs = maximize_1to1_IoU(IoU_matrix)
+    for patch in patches:
+        left_x, right_x, top_y, bottom_y = patch[0], patch[1], patch[2], patch[3]
+        gt_labels_full = load_ground_truth_labels(map_name_in_strec, multiline_handling) # Evaluation.load_ground_truth_labels(map_name_in_strec, "components")
+        gt_labels_crop = retain_crop_coords_only(gt_labels_full, left_x, right_x, top_y, bottom_y) 
+        gt_labels_crop = retain_alphabetic_annotations_only(gt_labels_crop)
+        gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop) #ExtractHandling.cast_coords_as_Polygons(gt_labels_full)
+
+        if spotter_target == 'fully_processed':
+            spotter_labels_full = ExtractHandling.load_fully_processed_labels(map_name_in_strec)
+            spotter_labels_crop = retain_crop_polygons_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+        else:
+            spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, spotter_target)
+            spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
+            if len(spotter_labels_crop) == 0:
+                return 0, gt_labels_crop, np.array([['0.0', 'shell', 'array']])
+            spotter_labels_crop = ExtractHandling.cast_coords_as_Polygons(spotter_labels_crop)
+            spotter_labels_crop.rename(columns={'text': 'annotation'}, inplace=True)
+        spotter_labels_crop = retain_alphabetic_annotations_only(spotter_labels_crop)
+
+        IoU_matrix = calculate_IoU_matrix(list(spotter_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)), list(gt_labels_crop[['label_polygons', 'annotation']].itertuples(index=False, name=None)))
+        num_detected_tmp.append(IoU_matrix.shape[0])
+        num_gt_tmp.append(IoU_matrix.shape[1])
+        IoU_pairs_tmp.append(maximize_1to1_IoU(IoU_matrix))
+    
+    num_detected = sum(num_detected_tmp)
+    num_gt = sum(num_gt_tmp)
+    IoU_pairs = np.concatenate(IoU_pairs_tmp)
+
     return num_detected, num_gt, IoU_pairs
 
 def edit_distance_similarity(word1, word2):
