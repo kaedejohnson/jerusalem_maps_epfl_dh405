@@ -127,7 +127,7 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
                 pca_feature.extend([{'Centroid': centroid_B,'PCA_Var': V_B, 'PCA_Basis': C_B, 'PCA_Expands': np.array([expand_major_B, expand_minor_B])}, {'Centroid': centroid_A,'PCA_Var': V_A, 'PCA_Basis': C_A,  'PCA_Expands': np.array([expand_major_A, expand_minor_A])}])
         
         PCA_features.append(pca_feature)
-
+    refine_PCA_basis(PCA_features, polygons)
     return PCA_features
 
 def crop_image_with_nabb(original_image, centroid, angle, expand_major, expand_minor):
