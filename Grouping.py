@@ -361,8 +361,6 @@ def refine_PCA_basis(PCA_features, polygons):
 
             result_a = solve_GM([init_theta_a], dirs_a, weights_a)
             result_b = solve_GM([init_theta_b], dirs_b, weights_b)
-
             
-            
-            PCA_features[poly_id][1]['PCA_Basis'] = align_with_original(init_p_a, result_a)
-            PCA_features[poly_id][2]['PCA_Basis'] = align_with_original(init_p_b, result_b)
+            PCA_features[poly_id][1]['PCA_Basis'] = align_with_original(initial_params, result_a)
+            PCA_features[poly_id][2]['PCA_Basis'] = align_with_original(initial_params, result_b)
