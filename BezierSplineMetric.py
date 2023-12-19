@@ -1,6 +1,8 @@
 from itertools import combinations
 import BezierSpline
 import numpy as np
+import SpotterWrapper
+from PIL import Image, ImageFile
 
 def calc_neighbours(polygons, PCA_features, radius_multiplier = 40, texts = None):
     neighbours = [[] for i in range(len(polygons))]
@@ -110,46 +112,9 @@ def get_distance_metric(score, i, j, infinitely_large_as):
     else:
         return infinitely_large_as # Infinitely large distance
 
-if __name__ == "__main__":
-    import SpotterWrapper
-    import Grouping
-    import pickle
-    from PIL import Image, ImageFile
-    
-    map_name_in_strec = "kiepert_1845"
-    df = pickle.load(open('processed/strec/' + map_name_in_strec + '/deduplicated_flattened_labels.pickle', 'rb'))
-
-    result = list(df["labels"])
-    polygons = []
-    texts = []
-    PCA_features = []
-
-    for i in range(len(result)):
-        poly = result[i][0]
-        polygons.append(poly)
-        texts.append(result[i][1])
-
-    PCA_features = Grouping.calc_PCA_feats(polygons, do_separation=True, enhance_coords=True)
-    print("PCA features calculated.")
-
-    # Calculate neighbours
-    neighbours = calc_neighbours(polygons, PCA_features, radius_multiplier = 40)
-    print("Neighbours found.")
-
-    # Calculate splines
-    b_splines, all_splines, scores = spline_metric(polygons, PCA_features, neighbours)
-    print("Splines calculated.")
-
-    # Get distance between polygon i and j
-    i = 259
-    j = 807
-    print(get_distance_metric(scores, i, j, infinitely_large_as=10000000))
-
-    # Draw splines
+def draw_splines(map_name_in_strec, polygons, texts, PCA_features, all_splines):
     vis = SpotterWrapper.PolygonVisualizer()
     canvas = Image.open(f'processed/strec/{map_name_in_strec}/raw.jpeg')
     vis.canvas_from_image(canvas)
-
     vis.draw_poly(polygons, texts, PCA_features, [sp for sp in all_splines if sp[1] < 0.5])
-
-    vis.save(f'processed/strec/{map_name_in_strec}/output.jpeg')
+    vis.save(f'processed/strec/{map_name_in_strec}/visualized_splines.jpeg')

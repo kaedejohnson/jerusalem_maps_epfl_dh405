@@ -235,7 +235,7 @@ class PolygonVisualizer:
                     polygon.append([x, y])
                 visualizer.draw_polygon(polygon, color, alpha=alpha)
             elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
-                for p in poly:
+                for p in poly.geoms: # kaede added .geoms - package version differences
                     polygon_x = p.exterior.coords.xy[0]
                     polygon_y = p.exterior.coords.xy[1]
                     polygon = []
