@@ -55,14 +55,14 @@ class ImagePairDataset(Dataset):
     def __getitem__(self, idx):
         img1_path, img2_path, label = self.data_list[idx]
 
-        # img1 = Image.open(img1_path)
-        # img2 = Image.open(img2_path)
-        # if self.transform:
-        #     img1 = self.transform(img1)
-        #     img2 = self.transform(img2)
+        img1 = Image.open(img1_path)
+        img2 = Image.open(img2_path)
+        if self.transform:
+            img1 = self.transform(img1)
+            img2 = self.transform(img2)
 
-        img1 = self.pre_processing(img1_path)
-        img2 = self.pre_processing(img2_path)
+        # img1 = self.pre_processing(img1_path)
+        # img2 = self.pre_processing(img2_path)
 
         return img1, img2, torch.tensor(label, dtype=torch.float32), img1_path, img2_path
 
@@ -126,14 +126,14 @@ train_size = int(0.8 * len(dataset))  # 80% for training
 test_size = len(dataset) - train_size  # 20% for testing
 train_dataset, test_dataset = random_split(dataset, [train_size, test_size])
 
-# Create DataLoaders for training and testing sets
-train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
-
-# Check if CUDA is available
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print(f'Using device: {device}')
-
+# # Create DataLoaders for training and testing sets
+# train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+# test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
+#
+# # Check if CUDA is available
+# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# print(f'Using device: {device}')
+#
 # # Transfer the model to the GPU
 # model.to(device)
 #
@@ -180,6 +180,10 @@ print(f'Using device: {device}')
 #         torch.save(model.state_dict(), f"font_disc_weights/FontDiscriminator_afterpad_{epoch + 1}_{accu * 100:.2f}.pth")
 
 
+# Check if CUDA is available
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+print(f'Using device: {device}')
+
 # evaluation
 model.load_state_dict(torch.load("font_disc_weights/FontDiscriminator_afterpad_40_96.96.pth"))
 model.to(device)
@@ -187,6 +191,10 @@ model.eval()
 all_labels = []
 all_predictions = []
 wrong_pairs = []
+
+# Create DataLoaders for training and testing sets
+train_loader = DataLoader(train_dataset, batch_size=32, shuffle=True)
+test_loader = DataLoader(test_dataset, batch_size=1, shuffle=False)
 
 with torch.no_grad():
     for img1, img2, labels, img1_path, img2_path in test_loader:

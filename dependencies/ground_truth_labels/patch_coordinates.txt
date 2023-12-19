@@ -6,4 +6,4 @@ saunders_patches = [{'left_x': 2350, 'right_x': 3850, 'top_y': 1750, 'bottom_y':
 
 kiepert_patches = [{'left_x': 2475, 'right_x': 3550, 'top_y': 4775, 'bottom_y': 5850}]
 
-vandevelde_patches = [{'left_x': 2850, 'right_x': 5250, 'top_y': 1450, 'bottom_y': 3850}]
+vandevelde_patches = [{'left_x': 2850, 'right_x': 5250, 'top_y': 1450, 'bottom_y': 3850}]
