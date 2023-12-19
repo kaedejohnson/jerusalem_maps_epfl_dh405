@@ -298,6 +298,19 @@ def solve_GM(initial_params, directions, weights_vec = None):
     result = np.array([np.cos(theta), np.sin(theta)])
     return result
 
+def align_with_original(init_p_x, result_x):
+    init_first_x = init_p_x
+    norm_init_first_x = np.linalg.norm(init_p_x)
+    first_x = result_x
+    norm_first_x = np.linalg.norm(first_x)
+    second_x = np.array([result_x[1], -result_x[0]])
+    cos_init_first = abs(init_first_x.dot(first_x) / (norm_init_first_x * norm_first_x))
+
+    if cos_init_first > 0.5 * np.sqrt(2):
+        return [first_x, second_x]
+    else:
+        return [second_x, first_x]
+    
 def refine_PCA_basis(PCA_features, polygons):
     for poly_id in range(len(polygons)):
         poly = polygons[poly_id]
@@ -320,22 +333,21 @@ def refine_PCA_basis(PCA_features, polygons):
         directions = [ d / np.linalg.norm(d) if d.dot(pricipal_components) >= 0 else -d / np.linalg.norm(d) for d in directions]
         
         if len(PCA_features[poly_id]) == 1:
-            initial_params = [ pricipal_components[0], pricipal_components[1]]
+            initial_params = np.array([ pricipal_components[0], pricipal_components[1]])
             init_theta = np.arctan2(initial_params[1], initial_params[0])
             
             result = solve_GM([init_theta], directions, weights)
 
-            PCA_features[poly_id][0]['PCA_Basis'][0] = result
-            PCA_features[poly_id][0]['PCA_Basis'][1] = np.array([result[1], -result[0]])
+            PCA_features[poly_id][0]['PCA_Basis'] = align_with_original(initial_params, result)
 
         if len(PCA_features[poly_id]) == 3:
             pca_a = PCA_features[poly_id][1]
             pc_a = pca_a['PCA_Basis'][0]
-            init_p_a = [pc_a[0], pc_a[1]]
+            init_p_a = np.array([pc_a[0], pc_a[1]])
             init_theta_a = np.arctan2(init_p_a[1], init_p_a[0])
             pca_b = PCA_features[poly_id][2]
             pc_b = pca_b['PCA_Basis'][0]
-            init_p_b = [pc_b[0], pc_b[1]]
+            init_p_b = np.array([pc_b[0], pc_b[1]])
             init_theta_b = np.arctan2(init_p_b[1], init_p_b[0])
 
             center_a = pca_a['Centroid']
@@ -349,7 +361,8 @@ def refine_PCA_basis(PCA_features, polygons):
 
             result_a = solve_GM([init_theta_a], dirs_a, weights_a)
             result_b = solve_GM([init_theta_b], dirs_b, weights_b)
-            PCA_features[poly_id][1]['PCA_Basis'][0] = result_a
-            PCA_features[poly_id][1]['PCA_Basis'][1] = np.array([result_a[1], -result_a[0]])
-            PCA_features[poly_id][2]['PCA_Basis'][0] = result_b
-            PCA_features[poly_id][2]['PCA_Basis'][1] = np.array([result_b[1], -result_b[0]])
+
+            
+            
+            PCA_features[poly_id][1]['PCA_Basis'] = align_with_original(init_p_a, result_a)
+            PCA_features[poly_id][2]['PCA_Basis'] = align_with_original(init_p_b, result_b)
