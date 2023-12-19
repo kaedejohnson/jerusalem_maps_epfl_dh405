@@ -39,7 +39,7 @@ def calc_PCA_feats(polygons, do_separation = True, enhance_coords = True):
             for x, y in zip(polygon_x, polygon_y):
                 raw_coords.append(np.array([x, y]))
         elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
-            for p in poly:
+            for p in poly.geoms: # kaede added .geoms - package version differences
                 polygon_x = p.exterior.coords.xy[0]
                 polygon_y = p.exterior.coords.xy[1]
                 for x, y in zip(polygon_x, polygon_y):
@@ -170,7 +170,7 @@ def polygon_crop(poly, image, enhance_coords = True):
         for x, y in zip(polygon_x, polygon_y):
             raw_coords.append(np.array([x, y]))
     elif isinstance(poly, sh.geometry.multipolygon.MultiPolygon):
-        for p in poly:
+        for p in poly.geoms: # kaede added .geoms - package version differences
             polygon_x = p.exterior.coords.xy[0]
             polygon_y = p.exterior.coords.xy[1]
             for x, y in zip(polygon_x, polygon_y):
