@@ -82,6 +82,7 @@ def check_for_crop(df, i, map_name_in_strec):
         img_tmp = Grouping.polygon_crop(df.iloc[i]['polygons'], Image.open("processed/strec/" + map_name_in_strec + "/raw.jpeg"))
         img_tmp.save(f"extracted_crops/{map_name_in_strec}_" + str(i) + ".jpeg")
 
+
 def calc_font_similarities(df, map_name_in_strec):
     f_sims = []
     neighbours = df['neighbours']
