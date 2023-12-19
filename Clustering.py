@@ -9,7 +9,13 @@ def get_feature(x_points, y_points):
 
     bounding_box_corner = [min(x_points), min(y_points), max(x_points), max(y_points)]
 
-    return bounding_box_corner
+    center = [np.mean(x_points), np.mean(y_points)]
+
+    #directions = [np.rad2deg(np.arctan2(y_points[i] - y_points[i-1], x_points[i] - x_points[i-1])) for i in range(1, len(x_points))]
+
+    #dir_hist = np.histogram(directions, bins=8, range=(-180, 180))[0]
+
+    return bounding_box_corner + center #+ list(dir_hist)
 
 
 def random_color():
@@ -29,7 +35,7 @@ def visualize_polygons(clustered, img_path):
     # draw polygons
     for label, cluster in clustered.items():
         if label == "-1":
-            color = (23,56,78)
+            continue
         else:
             color = label_to_color[label]
         pil_color = tuple(color)
@@ -44,9 +50,13 @@ def cluster_polygons(p_labels, conf_threshold = 0):
     features = []
     for i in range(len(p_labels['polygon_x'])):
         #if p_labels['score'] > conf_threshold:
-            features.append(get_feature(p_labels['polygon_x'][str(i)], p_labels['polygon_y'][str(i)]))
+            f = get_feature(p_labels['polygon_x'][str(i)], p_labels['polygon_y'][str(i)])
+            features.append(f)
+    #features = np.array(features)
+    #features -= np.mean(features, axis=0)
+    #features /= np.std(features, axis=0)
 
-    clustering = DBSCAN(eps=50, min_samples=3).fit(np.array(features))
+    clustering = DBSCAN(eps=50, min_samples=3).fit(features)
     c_labels = clustering.labels_
 
     clustered = {}

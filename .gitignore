@@ -6,3 +6,4 @@
 *.png
 test.py
 test2.py
+*.pyc

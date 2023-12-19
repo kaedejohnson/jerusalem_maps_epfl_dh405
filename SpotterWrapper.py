@@ -14,6 +14,22 @@ from detectron2.data.detection_utils import _apply_exif_orientation, convert_PIL
 
 import pandas as pd
 import BezierSpline as BS
+import math
+def rotate_point(point, center, angle_degrees, clockwise=False):
+    # Convert angle from degrees to radians
+    angle_radians = math.radians(angle_degrees) * (-1 if clockwise else 1)
+
+    # Extract coordinates
+    x, y = point
+    cx, cy = center
+    cos = math.cos(angle_radians)
+    sin = math.sin(angle_radians)
+
+    # Calculate new coordinates after rotation
+    new_x = (x - cx) * cos - (y - cy) * sin + cx
+    new_y = (x - cx) * sin + (y - cy) * cos + cy
+
+    return new_x, new_y
 
 def setup_cfg(args):
     # load config from file and command-line arguments
@@ -31,7 +47,7 @@ def setup_cfg(args):
     return cfg
 
 class Spotter:
-    def __init__(self, config_path, weight_path, confidence_thresh = 0.3, draw_thresh = 0.3) -> None:
+    def __init__(self, config_path, weight_path, confidence_thresh = 0.3, draw_thresh = 0.3, batch_mode = False) -> None:
         self.args = {}
         self.args["config_file"] = config_path
         if os.path.isfile(config_path) == False:
@@ -40,6 +56,7 @@ class Spotter:
         if os.path.isfile(weight_path) == False:
             print("Weights file path is not correct.")
         self.args["confidence_threshold"] = confidence_thresh
+        self.confidence_thresh = confidence_thresh
         self.cfg = setup_cfg(self.args)
         self.draw_thresh = draw_thresh
         self.metadata = MetadataCatalog.get(
@@ -47,15 +64,20 @@ class Spotter:
         )
         self.instance_mode = ColorMode.IMAGE
 
-        self.predictor = VisualizationDemo(self.cfg)
+        self.predictor = VisualizationDemo(self.cfg,batch_mode=batch_mode)
+        self.batch_mode = batch_mode
         self.cpu_device = torch.device("cpu")
         self.images = []
         self.offset_xs = []
         self.offset_ys = []
         self.instances = []
         self.combined_image = None
+        self.enhance_rotation = 1
         return
     
+    def set_enhance_rotation(self, enhance_rotation):
+        self.enhance_rotation = enhance_rotation
+
     def load_batch(self, images, offset_xs, offset_ys):
         self.images.clear()
         self.offset_xs.clear()
@@ -70,23 +92,109 @@ class Spotter:
         return
 
     def inference_single(self, image:Image, offset_x = 0, offset_y = 0, scale = 1.0):
-        image = _apply_exif_orientation(image)
-        image =  convert_PIL_to_numpy(image, format = "BGR")
-        predictions, poly_text_score_dict_list = self.predictor.inference_on_image(image)
-        self.instances.append(predictions["instances"].to(self.cpu_device))
-        #print(poly_text_score_dict_list)
+        size = image.size
+        center = (size[0] / 2, size[1] / 2)
 
+        images = []
+        rotations = [0, 90, 270, 180]
+        poly_text_score_dict_list_rotated_lst = []
+        for i in range(self.enhance_rotation):
+            if rotations[i] == 0:
+                image_rotated = image
+            else:
+                image_rotated = image.rotate(rotations[i])
+            image_rotated_np =  convert_PIL_to_numpy(image_rotated, format = "BGR")
+            images.append(image_rotated_np)
+
+        if self.batch_mode:
+            _, poly_text_score_dict_list_rotated_lst = self.predictor.inference_on_batch(images)
+        else:
+            for img in images:
+                _, poly_text_score_dict_list_rotated = self.predictor.inference_on_image(img)
+                poly_text_score_dict_list_rotated_lst.append(poly_text_score_dict_list_rotated)
+        
+        poly_text_score_dict_list = []
+        for i in range(self.enhance_rotation):
+            if rotations[i] == 0:
+                poly_text_score_dict_list.extend(poly_text_score_dict_list_rotated_lst[i])
+            for poly_text_score_dict_rotated in poly_text_score_dict_list_rotated_lst[i]:
+                poly_text_score_dict_rotated["polygon_x"][:], poly_text_score_dict_rotated["polygon_y"][:] = zip(*[rotate_point((x, y), center, rotations[i], clockwise=False) for x, y in zip(poly_text_score_dict_rotated["polygon_x"], poly_text_score_dict_rotated["polygon_y"])])
+                poly_text_score_dict_list.append(poly_text_score_dict_rotated)
         for poly_text_score_dict in poly_text_score_dict_list:
             poly_text_score_dict["polygon_x"][:] = poly_text_score_dict["polygon_x"][:] * scale + offset_x
             poly_text_score_dict["polygon_y"][:] = poly_text_score_dict["polygon_y"][:] * scale + offset_y
+        
+        final_lst = [p for p in poly_text_score_dict_list if p['score'] > self.confidence_thresh]
+        return final_lst
 
+    def rotate_images(self, images, rotations):
+        images_rotated = []
+        for i in range(self.enhance_rotation):
+            image_rotated = images.rotate(rotations[i])
+            image_rotated_np =  convert_PIL_to_numpy(image_rotated, format = "BGR")
+            images_rotated.append(image_rotated_np)
+        return images_rotated
+    
+    def rotate_polygons(self, poly_text_score_dict_list_rotated_lst, rotations, center, offset_x, offset_y):
+        poly_text_score_dict_list = []
+        for i in range(self.enhance_rotation):
+            for poly_text_score_dict_rotated in poly_text_score_dict_list_rotated_lst[i]:
+                poly_text_score_dict_rotated["polygon_x"][:], poly_text_score_dict_rotated["polygon_y"][:] = zip(*[rotate_point((x, y), center, rotations[i], clockwise=False) for x, y in zip(poly_text_score_dict_rotated["polygon_x"], poly_text_score_dict_rotated["polygon_y"])])
+                poly_text_score_dict_list.append(poly_text_score_dict_rotated)
+        for poly_text_score_dict in poly_text_score_dict_list:
+            poly_text_score_dict["polygon_x"][:] = poly_text_score_dict["polygon_x"][:] + offset_x
+            poly_text_score_dict["polygon_y"][:] = poly_text_score_dict["polygon_y"][:] + offset_y
+    
         return poly_text_score_dict_list
 
-    def inference_batch(self):
+    def inference_batch(self, batch_limitation = 0):
         combined_results = []
-        for image, offset_x, offset_y in zip(self.images, self.offset_xs, self.offset_ys):
-            combined_results.extend(self.inference_single(image, offset_x, offset_y))
+        length = len(self.images)
+        if self.batch_mode:
+            j = 0
+            rotations = [0, 90, 270, 180]
+            while j < length:
+                size = self.images[j].size
+                overall_size = size[0] * self.enhance_rotation * size[1]
+                batch_size = batch_limitation // overall_size + 1
+                if batch_size > 5:
+                    batch_size = 5
+                j += batch_size
+                ids = [i for i in range(j - batch_size, j) if i < length]
+                center = (size[0] / 2, size[1] / 2)
 
+                images = []
+                for id in ids:
+                    images.extend(self.rotate_images(self.images[id], rotations))
+
+                raw_poly_text_score_dict_list_rotated_lst = []
+                if self.batch_mode:
+                    _, raw_poly_text_score_dict_list_rotated_lst = self.predictor.inference_on_batch(images)
+                else:
+                    for img in images:
+                        _, poly_text_score_dict_list_rotated = self.predictor.inference_on_image(img)
+                        raw_poly_text_score_dict_list_rotated_lst.append(poly_text_score_dict_list_rotated)
+                
+                poly_text_score_dict_list_rotated_lst = []
+                # Group elems in raw_poly_text_score_dict_list_rotated_lst by self.enhance_rotation
+                for i in range(len(ids)):
+                    poly_text_score_dict_list_rotated_lst.append(raw_poly_text_score_dict_list_rotated_lst[i * self.enhance_rotation : (i + 1) * self.enhance_rotation])
+
+                poly_text_score_dict_list = []
+                for i, id in enumerate(ids):
+                    poly_text_score_dict_list += self.rotate_polygons(poly_text_score_dict_list_rotated_lst[i], rotations, center, self.offset_xs[id], self.offset_ys[id])
+                
+                final_lst = [p for p in poly_text_score_dict_list if p['score'] > self.confidence_thresh]
+
+                combined_results.extend(final_lst)
+
+                print(f"Processed {ids[-1] + 1}/{length}, {(ids[-1] + 1)/length*100:.2f}%")
+        else:
+            j = 0
+            for image, offset_x, offset_y in zip(self.images, self.offset_xs, self.offset_ys):
+                combined_results.extend(self.inference_single(image, offset_x, offset_y))
+                j += 1
+                print(f"Processed {j}/{length}, {j/length*100:.2f}%")
         return combined_results
 
     def draw(self, output_path = None, draw_instances = None, draw_offset_xs = None, draw_offset_ys = None):
