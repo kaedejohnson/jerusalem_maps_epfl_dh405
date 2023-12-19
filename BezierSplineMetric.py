@@ -112,7 +112,7 @@ def spline_metric(df, texts = None):
             b_splines.append([None, -1])
 
     #df['b_splines'] = b_splines
-    #df['all_splines'] = all_splines
+    df['all_splines'] = all_splines
     df['bezier_scores'] = scores
     
     return df
