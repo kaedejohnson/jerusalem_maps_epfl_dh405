@@ -5,6 +5,14 @@ saunders_patches = [{'left_x': 2350, 'right_x': 3850, 'top_y': 1750, 'bottom_y':
                     {'left_x': 7650, 'right_x': 8650, 'top_y': 3150, 'bottom_y': 4150}]
 
 kiepert_patches = [{'left_x': 1750, 'right_x': 3750, 'top_y': 4775, 'bottom_y': 6200},
-                    {'left_x': 2250, 'right_x': 4050, 'top_y': 5910, 'bottom_y': 7500}]
+                    {'left_x': 2250, 'right_x': 4050, 'top_y': 6050, 'bottom_y': 7500}]
 
 vandevelde_patches = [{'left_x': 2850, 'right_x': 5250, 'top_y': 1450, 'bottom_y': 3850}]
+
+kiepert_gt_patches = [[1750, 3750, 4775, 6200], [2250, 4050, 6050, 7500]]
+saunders_gt_patches = [[2350, 3850, 1750, 3250],\
+                       [6450, 7500, 2200, 3250],\
+                       [5400, 6400, 4500, 5500],\
+                       [7650, 8650, 5400, 6400],\
+                       [7650, 8650, 3150, 4150]]
+vandevelde_gt_patches = [[2850, 5250, 1450, 3850]]
