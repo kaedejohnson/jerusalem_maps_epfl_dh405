@@ -5,11 +5,13 @@ from collections import Counter
 import json 
 from itertools import combinations
 import ExtractHandling
+import SpotterWrapper
 import numpy as np
 import pandas as pd
 import unidecode
 import re
 import scipy
+from PIL import Image
 import warnings
 warnings.filterwarnings("ignore", message="Unpickling a shapely <2.0 geometry object.")
 
@@ -224,3 +226,18 @@ def prec_rec(map_name_in_strec, multiline_handling, patches, methods = 'methods_
     print("Avg of Text Recall: " + str(text_rec))
 
     return geo_prec, text_prec, geo_rec, text_rec, IoU_pairs, num_detected, num_gt
+
+
+def plot_recovered_seq(map_name_in_strec, methods='methods_1_2_3'):
+
+    # prepare polygons and texts to draw
+    spotter_labels_full = ExtractHandling.load_processed_labels(map_name_in_strec, methods)
+    polygons = spotter_labels_full['label_polygons'].tolist()
+    texts = spotter_labels_full['annotation'].tolist()
+
+    # drawing polygons
+    vis = SpotterWrapper.PolygonVisualizer()
+    canvas = Image.open(f'processed/strec/{map_name_in_strec}/raw.jpeg')
+    vis.canvas_from_image(canvas)
+    vis.draw_poly(polygons, texts, PCA_feature_list=None, BSplines=None, random_color=True)
+    vis.save(f'processed/strec/{map_name_in_strec}/recovered_sequences.jpeg')

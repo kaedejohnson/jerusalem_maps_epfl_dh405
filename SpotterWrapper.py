@@ -4,6 +4,7 @@ from PIL import Image, ImageDraw
 import shapely as sh
 import torch
 import numpy as np
+import random
 
 from detectron2.data import MetadataCatalog
 from detectron2.utils.visualizer import ColorMode
@@ -197,6 +198,7 @@ class Spotter:
                 print(f"Processed {j}/{length}, {j/length*100:.2f}%")
         return combined_results
 
+
     def draw(self, output_path = None, draw_instances = None, draw_offset_xs = None, draw_offset_ys = None):
         # Combine images based on offsets
         if len(self.images) == 0:
@@ -324,7 +326,7 @@ class PolygonVisualizer:
 
         return self.vis_final
     
-    def draw_poly(self, polygon_list:list, text_list:list, PCA_feature_list:list, BSplines:list = None):
+    def draw_poly(self, polygon_list:list, text_list:list, PCA_feature_list:list, BSplines:list = None, random_color=False):
         if self.canvas == None:
             print("No canvas loaded.")
             return
@@ -332,7 +334,10 @@ class PolygonVisualizer:
         visualizer = TextVisualizer(self.canvas, self.metadata, instance_mode=ColorMode.IMAGE, cfg=self.cfg)
         i = 0
         for poly, text in zip(polygon_list, text_list):
-            color = (0.1, 0.2, 0.5)
+            if random_color is True:
+                color = (random.random(), random.random(), random.random())
+            else:
+                color = (0.1, 0.2, 0.5)
             alpha = 0.5
             polygon = []
             if isinstance(poly, sh.geometry.polygon.Polygon):
