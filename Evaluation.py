@@ -10,6 +10,9 @@ import pandas as pd
 import unidecode
 import re
 import scipy
+import warnings
+warnings.filterwarnings("ignore", message="Unpickling a shapely <2.0 geometry object.")
+
 
 # Compared extracted labels to ground truth
 
@@ -201,10 +204,23 @@ def text_compare(s1, s2):
     s2_lwr_26 = remove_non_alphabetical_characters_and_accents(s2)
     return edit_distance_similarity(s1_lwr_26, s2_lwr_26)
 
-def prec_rec(IoU_pairs, num_detected, num_gt):
+def prec_rec(map_name_in_strec, multiline_handling, patches, methods = 'methods_1_2_3'):
+    num_detected, num_gt, IoU_pairs = geographic_evaluation(map_name_in_strec, multiline_handling, patches, methods)
+
     IoU_pairs = pd.DataFrame(IoU_pairs, columns=['geo_IoU', 'spotter_txt', 'gt_txt'])
-    print("Avg of Geographic Precision: " + str(IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_detected))
-    print("Avg of Geographic Recall: " + str(IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_gt))
     IoU_pairs['normalized_txt_similarity'] = IoU_pairs.apply(lambda row: text_compare(row['spotter_txt'], row['gt_txt']), axis=1)
-    print("Avg of Text Precision: " + str(IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_detected))
-    print("Avg of Text Recall: " + str(IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_gt))
+
+
+    geo_prec = IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_detected
+    text_prec = IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_detected
+
+    geo_rec = IoU_pairs['geo_IoU'].astype(float).sum(axis=0) / num_gt
+    text_rec = IoU_pairs['normalized_txt_similarity'].astype(float).sum(axis=0) / num_gt
+
+    print("Avg of Geographic Precision: " + str(geo_prec))
+    print("Avg of Text Precision: " + str(text_prec))
+    
+    print("Avg of Geographic Recall: " + str(geo_rec))
+    print("Avg of Text Recall: " + str(text_rec))
+
+    return geo_prec, text_prec, geo_rec, text_rec, IoU_pairs, num_detected, num_gt
