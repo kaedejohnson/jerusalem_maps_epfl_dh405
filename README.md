@@ -38,3 +38,7 @@ When you have the results from three maps (processed/strec/{map_name_in_strec}/f
 
 ## Results:
 Please refer to our [Wiki page](https://fdh.epfl.ch/index.php/Extracting_Toponyms_from_Maps_of_Jerusalem) for detailed methods and analysis.
+
+## Deliverables:
+1. A set of X ground truth toponyms across 3 historical maps of Jerusalem. One should find these json files as dependences/ground_truth_labels/{map_name}.json.
+2. A set of X extracted toponyms across 3 historical maps of Jerusalem. One should find the resulting polygons in json files as processed/strec/{map_name}/final.json.
