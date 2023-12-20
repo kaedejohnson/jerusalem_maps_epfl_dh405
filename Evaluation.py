@@ -157,7 +157,7 @@ def geographic_evaluation(map_name_in_strec, multiline_handling, patches, method
         gt_labels_crop = ExtractHandling.cast_coords_as_Polygons(gt_labels_crop) #ExtractHandling.cast_coords_as_Polygons(gt_labels_full)
 
         if methods == "methods_0":
-            spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, "combined_tagged_0.json")
+            spotter_labels_full = ExtractHandling.load_spotter_labels(map_name_in_strec, "combined_tagged_1.json")
             spotter_labels_crop = retain_crop_coords_only(spotter_labels_full, left_x, right_x, top_y, bottom_y)
             if len(spotter_labels_crop) == 0:
                 return 0, gt_labels_crop, np.array([['0.0', 'shell', 'array']])
