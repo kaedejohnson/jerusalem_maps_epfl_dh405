@@ -9,3 +9,6 @@ test2.py
 *.pyc
 .\__pycache__\*
 processed/strec/kiepert_1845/seq_rec_prepared_labels.pickle
+/sequence_recovery_tianhao.py
+*.pyc
+/pipeline_tianhao.ipynb

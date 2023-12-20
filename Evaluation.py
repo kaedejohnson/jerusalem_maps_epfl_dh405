@@ -26,7 +26,7 @@ def aggregate_components_to_multiline(multiline_g):
     })
 
 def load_ground_truth_labels(map_name_in_strec, multiline_handling, labels_on_fullsize_map=True):
-    with open('dependencies/ground_truth_labels/' + map_name_in_strec + '.json') as f:
+    with open('dependencies/ground_truth_labels/' + map_name_in_strec + '.json', encoding='utf-8') as f:
         gt_labels_tmp = json.load(f)
         gt_labels = pd.DataFrame([
             {
