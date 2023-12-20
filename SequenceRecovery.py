@@ -40,7 +40,7 @@ def combine_labels(label1_row, label2_row):
 
     font_scores1 = label1_row['font_scores']
     font_scores2 = label2_row['font_scores']
-    font_scores_new = {key: max(bezier_scores1.get(key, 0), bezier_scores2.get(key, 0)) for key in set(font_scores1) | set(font_scores2)}
+    font_scores_new = {key: max(font_scores1.get(key, 0), font_scores2.get(key, 0)) for key in set(font_scores1) | set(font_scores2)}
     neighbours1 = label1_row['neighbours']
     neighbours2 = label2_row['neighbours']
     if neighbours1 is None:
