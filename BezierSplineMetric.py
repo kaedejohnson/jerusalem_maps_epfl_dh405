@@ -24,6 +24,41 @@ def calc_neighbours(df, radius_multiplier = 40, texts = None):
     df['neighbours'] = neighbours
     return df
 
+def spline_metric_for_anchor_pair(anchor_pair, i_switchable, j_switchable):
+    splines = []
+    spline_plain = BezierSpline.BezierSpline()
+    spline_plain.from_pca(anchor_pair[0], anchor_pair[1], std_var_factor = 1)
+    splines.append(spline_plain)
+    if i_switchable == True:
+        spline_switch_i = BezierSpline.BezierSpline()
+        spline_switch_i.from_pca(anchor_pair[0], anchor_pair[1], 1, 1, 0)
+        splines.append(spline_switch_i)
+    if j_switchable == True:
+        spline_switch_j = BezierSpline.BezierSpline()
+        spline_switch_j.from_pca(anchor_pair[0], anchor_pair[1], 1, 0, 1)
+        splines.append(spline_switch_j)
+    if i_switchable == True and j_switchable == True:
+        spline_switch_both = BezierSpline.BezierSpline()
+        spline_switch_both.from_pca(anchor_pair[0], anchor_pair[1], 1, 1, 1)
+        splines.append(spline_switch_both)
+
+    anchor_dist = 1 # np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
+
+    inner_min_cuvature = 10000000
+    for spline in splines:
+        max_curvature = spline.get_max_curvature(20)  # Size invariant curvature with distance penalty
+        gap_penalty = spline.get_control_seg_length(0, 1)
+        max_cost = max_curvature * anchor_dist * gap_penalty
+        if max_cost < inner_min_cuvature:
+            inner_min_cuvature = max_cost
+            inner_best_spline = spline
+
+    #if inner_min_cuvature < min_cuvature:
+    #    min_cuvature = inner_min_cuvature
+    #    best_spline = inner_best_spline
+    
+    return inner_best_spline, inner_min_cuvature
+
 def spline_metric(df, texts = None):
     b_splines = []
     all_splines = []
@@ -34,8 +69,10 @@ def spline_metric(df, texts = None):
     for i in range(len(pca_features)):
         pca_i = pca_features[i]
         i_switchable = False
+        i_has_sub_anchor = False
         if len(pca_i) == 3:
             pca_i = pca_i[1:]
+            i_has_sub_anchor = True
         else:
             if pca_i[0]['PCA_Expands'][0] < 1.5 * pca_i[0]['PCA_Expands'][1]:
                 i_switchable = True
@@ -49,59 +86,28 @@ def spline_metric(df, texts = None):
         for j in neighbours[i]:
             pca_j = pca_features[j]
             j_switchable = False
+            j_has_sub_anchor = False
             if len(pca_j) == 3:
                 pca_j = pca_j[1:]
+                j_has_sub_anchor = True
             else:
                 if pca_j[0]['PCA_Expands'][0] < 1.5 * pca_j[0]['PCA_Expands'][1]:
                     j_switchable = True
-            best_pair = None
-            min_dist = 10000000
-            for anchor_i in pca_i:
-                for anchor_j in pca_j:
-                    dist_sqr = (anchor_i['Centroid'][0] - anchor_j['Centroid'][0])**2 + (anchor_i['Centroid'][1] - anchor_j['Centroid'][1])**2
-                    if dist_sqr < min_dist:
-                        min_dist = dist_sqr
-                        best_pair = (anchor_i, anchor_j)
-            
-            if best_pair != None:
-                splines = []
-                spline_plain = BezierSpline.BezierSpline()
-                spline_plain.from_pca(best_pair[0], best_pair[1], std_var_factor = 1)
-                splines.append(spline_plain)
-                if i_switchable == True:
-                    spline_switch_i = BezierSpline.BezierSpline()
-                    spline_switch_i.from_pca(best_pair[0], best_pair[1], 1, 1, 0)
-                    splines.append(spline_switch_i)
-                if j_switchable == True:
-                    spline_switch_j = BezierSpline.BezierSpline()
-                    spline_switch_j.from_pca(best_pair[0], best_pair[1], 1, 0, 1)
-                    splines.append(spline_switch_j)
-                if i_switchable == True and j_switchable == True:
-                    spline_switch_both = BezierSpline.BezierSpline()
-                    spline_switch_both.from_pca(best_pair[0], best_pair[1], 1, 1, 1)
-                    splines.append(spline_switch_both)
 
-                anchor_dist = 1 # np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
-
-                inner_min_cuvature = 10000000
-                for spline in splines:
-                    max_curvature = spline.get_max_curvature(20)  # Size invariant curvature with distance penalty
-                    gap_penalty = spline.get_control_seg_length(0, 1)
-                    max_cost = max_curvature * anchor_dist * gap_penalty
-                    if max_cost < inner_min_cuvature:
-                        inner_min_cuvature = max_cost
-                        inner_best_spline = spline
-                    curr_i_spline_list.append([spline, max_cost])
-
-                if inner_min_cuvature < min_cuvature:
-                    min_cuvature = inner_min_cuvature
-                    best_spline = inner_best_spline
+            for a_i, anchor_i in enumerate(pca_i):
+                a_id_i = (i, a_i)
+                #if i_has_sub_anchor == True:
+                #    a_id_i = (i, a_i + 1)
+                curr_i_score_dict[a_id_i[1]] = {}
+                for a_j, anchor_j in enumerate(pca_j):
+                    a_id_j = (j, a_j)
+                    #if j_has_sub_anchor == True:
+                    #    a_id_j = (j, a_j + 1)
+                    pair = (anchor_i, anchor_j)
+                    spline, score = spline_metric_for_anchor_pair(pair, i_switchable, j_switchable)
+                    curr_i_spline_list.append(spline, (a_id_i, a_id_j))
+                    curr_i_score_dict[a_id_i[1]][a_id_j] = score
                 
-                curr_i_score_dict[j] = inner_min_cuvature
-
-                #if (i == 1026 and j == 1030) or (i == 1030 and j == 1026):
-                #    print(i, j)
-                #    best_spline.draw()
 
         all_splines.append(curr_i_spline_list)
         scores.append(curr_i_score_dict)
@@ -114,28 +120,47 @@ def spline_metric(df, texts = None):
     #df['b_splines'] = b_splines
     df['all_splines'] = all_splines
     df['bezier_scores'] = scores
+    """
+    scores = [
+        {
+            anchor_id1: {(poly_id1, anchor_id3): score, (poly_id3, anchor_id5): score, ...}, 
+            anchor_id2: {(poly_id2, anchor_id4): score, (poly_id4, anchor_id6): score, ...},
+            ...
+        },
+        ...
+    ]
+    """
     
     return df
 
-def get_distance_metric(df, i, j, infinitely_large_as):
-    i_has_j = False
-    j_has_i = False
+def get_distance_metric(score_dict, i_anchors, j_anchors, infinitely_large_as):
+    i_score = infinitely_large_as
+    i_minimum_at = tuple()
+    for anchor_id_i in i_anchors:
+        for anchor_id_j in j_anchors:
+            i_scores = score_dict[anchor_id_i[0]][anchor_id_i[1]]
+            if anchor_id_j in i_scores.keys():
+                score = i_scores[anchor_id_j]
+                if score < i_score:
+                    i_score = score
+                    i_minimum_at = (anchor_id_i, anchor_id_j)
 
-    i_scores = df.loc[i]['bezier_scores']
-    j_scores = df.loc[j]['bezier_scores']
-    if j in i_scores.keys():
-        i_has_j = True
-    elif i in j_scores.keys():
-        j_has_i = True
+    j_score = infinitely_large_as
+    j_minimum_at = tuple()
+    for anchor_id_j in j_anchors:
+        for anchor_id_i in i_anchors:
+            j_scores = score_dict[anchor_id_j[0]][anchor_id_j[1]]
+            if anchor_id_i in j_scores.keys():
+                score = j_scores[anchor_id_i]
+                if score < j_score:
+                    j_score = score
+                    j_minimum_at = (anchor_id_i, anchor_id_j)
 
-    if i_has_j == True and j_has_i == True:
-        return min(i_scores[j], j_scores[i])
-    elif i_has_j == True:
-        return i_scores[j]
-    elif j_has_i == True:
-        return j_scores[i]
+    score = infinitely_large_as
+    if i_score < j_score:
+        return i_score, i_minimum_at
     else:
-        return infinitely_large_as # Infinitely large distance
+        return j_score, j_minimum_at
 
 def draw_splines(map_name_in_strec, polygons, texts, PCA_features, all_splines, spline_metric_threshold):
     vis = SpotterWrapper.PolygonVisualizer()
