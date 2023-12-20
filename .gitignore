@@ -12,3 +12,5 @@ processed/strec/kiepert_1845/seq_rec_prepared_labels.pickle
 /sequence_recovery_tianhao.py
 *.pyc
 /pipeline_tianhao.ipynb
+__pycache__/BezierSplineMetric.cpython-38.pyc
+/evaluation_tianhao.py
