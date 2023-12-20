@@ -71,7 +71,7 @@ def recover_sequence(df, R, to_combine):
                 R.pop(pair[1])
             except:
                 pass
-        else: # one of the polygons has already been recovered into a sequence so no combination can no longer occur
+        else: # one of the polygons has already been recovered into a sequence so recovery can no longer occur
             pass
     return df, R
 
