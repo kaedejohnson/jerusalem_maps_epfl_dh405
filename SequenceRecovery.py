@@ -9,6 +9,7 @@ import SpotterWrapper
 import Grouping
 import BezierSplineMetric
 import FontSimilarity
+import numpy as np
 
 importlib.reload(SpotterWrapper)
 importlib.reload(Grouping)
@@ -49,7 +50,11 @@ def combine_labels(label1_row, label2_row):
         neighbours2 = []
     neighbours_new = list(set(neighbours1 + neighbours2))
 
-    return [(poly_new, text_new), poly_new, text_new, neighbours_new, bezier_scores_new, font_scores_new]
+    text_list1 = label1_row['text_list']
+    text_list2 = label2_row['text_list']
+    text_list_new = text_list1 + text_list2
+
+    return [(poly_new, text_new), poly_new, text_new, neighbours_new, bezier_scores_new, font_scores_new, text_list_new]
 
 def recover_sequence(df, R, to_combine):
 
@@ -97,7 +102,7 @@ def sl_sequence_recovery_wrapper(df, font_threshold, bezier_threshold):
     pre_seqrec = 0
     post_seqrec = len(df)
     R = None
-
+    df['text_list'] = df.apply(lambda row: [(np.array([row['polygons'].centroid.x, row['polygons'].centroid.y]), row['texts'])], axis=1)
     while pre_seqrec - post_seqrec != 0:
         pre_seqrec = post_seqrec
 
@@ -108,6 +113,10 @@ def sl_sequence_recovery_wrapper(df, font_threshold, bezier_threshold):
         # recover sequences based on candidates
         df, R = recover_sequence(df, R, to_combine)
         post_seqrec = len(df)
+
+    for index, row in df.iterrows():
+        sorted_text = sorted(row['text_list'], key=lambda x: x[1][0])
+        row['text'] = " ".join([_text[1] for _text in sorted_text])
 
     print("Sequence Recovery completed with " + str(pre_seqrec) + " labels.")
     return df
