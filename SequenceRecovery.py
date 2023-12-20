@@ -53,7 +53,7 @@ def combine_labels(label1_row, label2_row):
 
 def recover_sequence(df, R, to_combine):
 
-    sorted_to_combine = to_combine #sorted(to_combine, key=lambda x: x[1])
+    sorted_to_combine = sorted(to_combine, key=lambda x: x[1])
 
     for pair_w_score in sorted_to_combine:
         pair = pair_w_score[0]

@@ -97,7 +97,7 @@ def spline_metric(df, texts = None):
                     min_cuvature = inner_min_cuvature
                     best_spline = inner_best_spline
                 
-                curr_i_score_dict[j] = min_cuvature
+                curr_i_score_dict[j] = inner_min_cuvature
 
                 #if (i == 1026 and j == 1030) or (i == 1030 and j == 1026):
                 #    print(i, j)
@@ -137,9 +137,9 @@ def get_distance_metric(df, i, j, infinitely_large_as):
     else:
         return infinitely_large_as # Infinitely large distance
 
-def draw_splines(map_name_in_strec, polygons, texts, PCA_features, all_splines):
+def draw_splines(map_name_in_strec, polygons, texts, PCA_features, all_splines, spline_metric_threshold):
     vis = SpotterWrapper.PolygonVisualizer()
     canvas = Image.open(f'processed/strec/{map_name_in_strec}/raw.jpeg')
     vis.canvas_from_image(canvas)
-    vis.draw_poly(polygons, texts, PCA_features, [sp for sp in all_splines if sp[1] < 0.5])
+    vis.draw_poly(polygons, texts, PCA_features, [sp for sp in all_splines if sp[1] < spline_metric_threshold])
     vis.save(f'processed/strec/{map_name_in_strec}/visualized_splines.jpeg')
