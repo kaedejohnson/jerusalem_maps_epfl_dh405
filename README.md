@@ -42,5 +42,5 @@ Please refer to our [Wiki page](https://fdh.epfl.ch/index.php/Extracting_Toponym
 ## Deliverables:
 1. A novel, general-use, and computationally accessible toponym extraction pipeline capable of improving accuracy for pre-trained SOTA neural network models. One should find this in pipeline.ipynb, from "3: Label combination" onward.
 2. A set of 341 ground truth toponyms across 3 historical maps of Jerusalem. One should find these json files as dependences/ground_truth_labels/{map_name}.json.
-3. A set of X extracted toponyms across 3 historical maps of Jerusalem. One should find the resulting polygons in json files as processed/strec/{map_name}/final.json.
+3. A set of 3,392 extracted toponyms across 3 historical maps of Jerusalem. One should find the resulting polygons in json files as processed/strec/{map_name}/final.json.
 4. A set of 2,469 labels denoting font similarity in images of toponyms. One should find the resulting labels in dependences/ground_truth_labels/ground_truth_labels.json.
