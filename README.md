@@ -1,6 +1,7 @@
 # jerusalem_maps_epfl_dh405
 
 ## Setup:
+Installing the mapKurator spotter on Windows is rather cumbersome due to precise package requirements and source code alterations not listed in the mapKurator documentation. Those wishing to recreate and investigate our novel pipeline may wish to forgo installation of mapKurator's spotter and instead use our results from mapKurator's unaltered spotter module; this can be done by beginning at "Processing" below.
 
 ### Installation
 #### Windows:
@@ -30,10 +31,10 @@
 5. Replace filepaths in the second code cell of pipeline.ipynb if necessary.
 
 ### Processing
-You must setup correct paths in step #5. Steps from "3: Label combination" on, process one map at a time, specify the map name with varialble map_name_in_strec.
+You must setup correct paths in step #5 above. To run our pipeline only (not the mapKurator spotter), run cells from "3: Label combination" onward. This processes one map at a time, as specified by map_name_in_strec.
 
 ### Evaluation
-When you have the results from three maps, run evaluation section. Recalls and precisions for each methods will be printed.
+When you have the results from three maps (processed/strec/{map_name_in_strec}/fully_processed_labels.pickle), run cells from "4: Evaluation". Recalls and precisions for each map will be printed.
 
 ## Results:
-Please refer to our [Wiki page](https://fdh.epfl.ch/index.php/Extracting_Toponyms_from_Maps_of_Jerusalem) for detailed results and analysis.
+Please refer to our [Wiki page](https://fdh.epfl.ch/index.php/Extracting_Toponyms_from_Maps_of_Jerusalem) for detailed methods and analysis.
