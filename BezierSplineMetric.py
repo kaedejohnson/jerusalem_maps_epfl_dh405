@@ -66,27 +66,28 @@ def spline_metric(df, texts = None):
             if best_pair != None:
                 splines = []
                 spline_plain = BezierSpline.BezierSpline()
-                spline_plain.from_pca(best_pair[0], best_pair[1], std_var_factor = 1)
+                var_factor = 0.9
+                spline_plain.from_pca(best_pair[0], best_pair[1], std_var_factor = var_factor)
                 splines.append(spline_plain)
                 if i_switchable == True:
                     spline_switch_i = BezierSpline.BezierSpline()
-                    spline_switch_i.from_pca(best_pair[0], best_pair[1], 1, 1, 0)
+                    spline_switch_i.from_pca(best_pair[0], best_pair[1], var_factor, 1, 0)
                     splines.append(spline_switch_i)
                 if j_switchable == True:
                     spline_switch_j = BezierSpline.BezierSpline()
-                    spline_switch_j.from_pca(best_pair[0], best_pair[1], 1, 0, 1)
+                    spline_switch_j.from_pca(best_pair[0], best_pair[1], var_factor, 0, 1)
                     splines.append(spline_switch_j)
                 if i_switchable == True and j_switchable == True:
                     spline_switch_both = BezierSpline.BezierSpline()
-                    spline_switch_both.from_pca(best_pair[0], best_pair[1], 1, 1, 1)
+                    spline_switch_both.from_pca(best_pair[0], best_pair[1], var_factor, 1, 1)
                     splines.append(spline_switch_both)
 
-                anchor_dist = 1 # np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
-
+                anchor_dist = np.linalg.norm(best_pair[0]['Centroid'] - best_pair[1]['Centroid'])
+                scale = 0.5 * (best_pair[0]['PCA_Expands'][1] + best_pair[1]['PCA_Expands'][1])
                 inner_min_cuvature = 10000000
                 for spline in splines:
                     max_curvature = spline.get_max_curvature(20)  # Size invariant curvature with distance penalty
-                    gap_penalty = spline.get_control_seg_length(0, 1)
+                    gap_penalty = spline.get_control_seg_length(0, 1) / scale
                     max_cost = max_curvature * anchor_dist * gap_penalty
                     if max_cost < inner_min_cuvature:
                         inner_min_cuvature = max_cost
@@ -118,24 +119,22 @@ def spline_metric(df, texts = None):
     return df
 
 def get_distance_metric(df, i, j, infinitely_large_as):
-    i_has_j = False
-    j_has_i = False
-
     i_scores = df.loc[i]['bezier_scores']
     j_scores = df.loc[j]['bezier_scores']
-    if j in i_scores.keys():
-        i_has_j = True
-    elif i in j_scores.keys():
-        j_has_i = True
+    i_constituents = df.loc[i]['constituents']
+    j_constituents = df.loc[j]['constituents']
 
-    if i_has_j == True and j_has_i == True:
-        return min(i_scores[j], j_scores[i])
-    elif i_has_j == True:
-        return i_scores[j]
-    elif j_has_i == True:
-        return j_scores[i]
-    else:
-        return infinitely_large_as # Infinitely large distance
+    candidate_scores = [infinitely_large_as]
+
+    for c_i in i_constituents:
+        if c_i in j_scores.keys():
+            candidate_scores.append(j_scores[c_i])
+        
+    for c_j in j_constituents:
+        if c_j in i_scores.keys():
+            candidate_scores.append(i_scores[c_j])
+
+    return min(candidate_scores) # Infinitely large distance
 
 def draw_splines(map_name_in_strec, polygons, texts, PCA_features, all_splines, spline_metric_threshold):
     vis = SpotterWrapper.PolygonVisualizer()
