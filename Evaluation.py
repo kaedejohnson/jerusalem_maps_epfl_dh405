@@ -228,7 +228,7 @@ def prec_rec(map_name_in_strec, multiline_handling, patches, methods = 'methods_
     return geo_prec, text_prec, geo_rec, text_rec, IoU_pairs, num_detected, num_gt
 
 
-def plot_recovered_seq(map_name_in_strec, methods='methods_1_2_3'):
+def plot_recovered_seq(map_name_in_strec, methods='methods_1_2_3', suffix = ''):
 
     # prepare polygons and texts to draw
     spotter_labels_full = ExtractHandling.load_processed_labels(map_name_in_strec, methods)
@@ -240,4 +240,4 @@ def plot_recovered_seq(map_name_in_strec, methods='methods_1_2_3'):
     canvas = Image.open(f'processed/strec/{map_name_in_strec}/raw.jpeg')
     vis.canvas_from_image(canvas)
     vis.draw_poly(polygons, texts, PCA_feature_list=None, BSplines=None, random_color=True)
-    vis.save(f'processed/strec/{map_name_in_strec}/recovered_sequences.jpeg')
+    vis.save(f'processed/strec/{map_name_in_strec}/recovered_sequences{suffix}.jpeg')
