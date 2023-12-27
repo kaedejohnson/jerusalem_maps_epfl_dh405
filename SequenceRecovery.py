@@ -153,15 +153,5 @@ def sl_sequence_recovery_wrapper(df, font_threshold = 0.5, bezier_threshold = 1.
         df, R = recover_sequence(df, R, to_combine)
         post_seqrec = len(df)
 
-    new_texts = []
-    new_labels = []
-    for index, row in df.iterrows():
-        sorted_text = sorted(row['text_list'], key=lambda x: x[0][0])
-        new_texts.append(" ".join([_text[1] for _text in sorted_text]))
-        new_labels.append((row['labels'][0], row['texts']))
-
-    df['labels'] = new_labels
-    df['texts'] = new_texts
-
     print("Sequence Recovery completed with " + str(pre_seqrec) + " labels.")
     return df
