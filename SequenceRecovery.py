@@ -9,7 +9,9 @@ import SpotterWrapper
 import Grouping
 import BezierSplineMetric
 import FontSimilarity
+import RumseyMetric
 import numpy as np
+import random
 
 importlib.reload(SpotterWrapper)
 importlib.reload(Grouping)
@@ -22,11 +24,14 @@ importlib.reload(FontSimilarity)
 
 
 def combine_labels(label1_row, label2_row):
-
+    new_row_dict = {}
     poly1 = label1_row['labels'][0]
     poly2 = label2_row['labels'][0]
     poly_new = poly1.union(poly2) # returns multipolygon object with disjoint polygons if polygons are disjoint
-
+    text_new = ''
+    new_row_dict['labels'] = (poly_new, text_new)
+    new_row_dict['polygons'] = poly_new
+    new_row_dict['texts'] = text_new
     #text1 = label1_row['labels'][1]
     #text2 = label2_row['labels'][1]
     #leftmost_poly = [poly1, poly2].index(min([poly1, poly2], key=lambda shape: shape.bounds[0]))
@@ -34,15 +39,17 @@ def combine_labels(label1_row, label2_row):
     #    text_new = text1 + " " + text2
     #else:
     #    text_new = text2 + " " + text1
-    text_new = ''
 
     bezier_scores1 = label1_row['bezier_scores']
     bezier_scores2 = label2_row['bezier_scores']
     bezier_scores_new = {key: min(bezier_scores1.get(key, float('inf')), bezier_scores2.get(key, float('inf'))) for key in set(bezier_scores1) | set(bezier_scores2)}
+    new_row_dict['bezier_scores'] = bezier_scores_new
 
-    font_scores1 = label1_row['font_scores']
-    font_scores2 = label2_row['font_scores']
-    font_scores_new = {key: max(font_scores1.get(key, 0), font_scores2.get(key, 0)) for key in set(font_scores1) | set(font_scores2)}
+    #font_scores1 = label1_row['font_scores']
+    #font_scores2 = label2_row['font_scores']
+    #font_scores_new = {key: max(font_scores1.get(key, 0), font_scores2.get(key, 0)) for key in set(font_scores1) | set(font_scores2)}
+    new_row_dict['font_scores'] = 1
+
     neighbours1 = label1_row['neighbours']
     neighbours2 = label2_row['neighbours']
     if neighbours1 is None:
@@ -50,16 +57,34 @@ def combine_labels(label1_row, label2_row):
     if neighbours2 is None:
         neighbours2 = []
     neighbours_new = list(set(neighbours1 + neighbours2))
+    new_row_dict['neighbours'] = neighbours_new
 
     text_list1 = label1_row['text_list']
     text_list2 = label2_row['text_list']
     text_list_new = text_list1 + text_list2
+    new_row_dict['text_list'] = text_list_new
 
     constituents1 = label1_row['constituents']
     constituents2 = label2_row['constituents']
     constituents_new = constituents1 + constituents2
+    new_row_dict['constituents'] = constituents_new
 
-    return [(poly_new, text_new), poly_new, text_new, neighbours_new, bezier_scores_new, font_scores_new, text_list_new, constituents_new]
+    anchors1 = label1_row['anchors']
+    anchors2 = label2_row['anchors']
+    anchors_new = anchors1 + anchors2
+    new_row_dict['anchors'] = anchors_new
+
+    pts1 = label1_row['pts']
+    pts2 = label2_row['pts']
+    pts_new = pts1 + pts2
+    new_row_dict['pts'] = pts_new
+
+    width1 = label1_row['width']
+    width2 = label2_row['width']
+    width_new = 0.5 * (width1 + width2)
+    new_row_dict['width'] = width_new
+
+    return new_row_dict
 
 def recover_sequence(df, R, to_combine):
 
@@ -85,7 +110,7 @@ def recover_sequence(df, R, to_combine):
             pass
     return df, R
 
-def update_R_matrix(df, font_threshold, bezier_threshold, R = None):
+def update_R_matrix(df, font_threshold, bezier_threshold, R = None, use_rumsey_metric = False):
     if R == None:
         R = {}
     to_combine = []
@@ -95,14 +120,22 @@ def update_R_matrix(df, font_threshold, bezier_threshold, R = None):
         if j in R[i].keys():
             pass
         else:
-            font_similarity_score = 1 # FontSimilarity.get_similarity_metric(df, i, j)
-            spline_distance_score = BezierSplineMetric.get_distance_metric(df, i, j, infinitely_large_as=10000000)
-            R[i][j] = (font_similarity_score, spline_distance_score)
-            if font_similarity_score > font_threshold and spline_distance_score < bezier_threshold:
-                to_combine.append(((i,j), spline_distance_score))
+            if use_rumsey_metric:
+                if j not in df.loc[i]['neighbours']:
+                    continue
+                rumsey_score = RumseyMetric.rumsey_metric(df, i, j)
+                R[i][j] = (rumsey_score, random.random())
+                if rumsey_score == 1:
+                    to_combine.append(((i,j), 0))
+            else:
+                font_similarity_score = 1 # FontSimilarity.get_similarity_metric(df, i, j)
+                spline_distance_score = BezierSplineMetric.get_distance_metric(df, i, j, infinitely_large_as=10000000)
+                R[i][j] = (font_similarity_score, spline_distance_score)
+                if font_similarity_score > font_threshold and spline_distance_score < bezier_threshold:
+                    to_combine.append(((i,j), spline_distance_score))
     return R, to_combine
 
-def sl_sequence_recovery_wrapper(df, font_threshold, bezier_threshold):
+def sl_sequence_recovery_wrapper(df, font_threshold = 0.5, bezier_threshold = 1.5, use_rumsey_metric = False):
 
     pre_seqrec = 0
     post_seqrec = len(df)
@@ -113,18 +146,12 @@ def sl_sequence_recovery_wrapper(df, font_threshold, bezier_threshold):
         pre_seqrec = post_seqrec
 
         # map it to comparison matrix, find candidates for sequences
-        R, to_combine = update_R_matrix(df, font_threshold, bezier_threshold, R)
+        R, to_combine = update_R_matrix(df, font_threshold, bezier_threshold, R, use_rumsey_metric)
         print(str(pre_seqrec) + " labels.")
 
         # recover sequences based on candidates
         df, R = recover_sequence(df, R, to_combine)
         post_seqrec = len(df)
-
-    for index, row in df.iterrows():
-        sorted_text = sorted(row['text_list'], key=lambda x: x[0][0])
-        row['texts'] = " ".join([_text[1] for _text in sorted_text])
-        row['labels'] = (row['labels'][0], row['texts'])
-
 
     print("Sequence Recovery completed with " + str(pre_seqrec) + " labels.")
     return df

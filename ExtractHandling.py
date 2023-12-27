@@ -25,6 +25,8 @@ def load_processed_labels(map_name_in_strec, methods):
         df = pickle.load(open('processed/strec/' + map_name_in_strec + '/deduplicated_flattened_labels.pickle', 'rb'))
     elif methods == "methods_1_2_3":
         df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels.pickle', 'rb'))
+    elif methods == "methods_1_2_r":
+        df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels_rumsey.pickle', 'rb'))
     df = pd.DataFrame(df['labels'].tolist(), columns=['label_polygons','annotation'])
     return df
 
