@@ -227,6 +227,17 @@ def prec_rec(map_name_in_strec, multiline_handling, patches, methods = 'methods_
 
     return geo_prec, text_prec, geo_rec, text_rec, IoU_pairs, num_detected, num_gt
 
+def prec_rec_wrapper(map_name_in_strec, multiline_handling, patches):
+    print("\n" + map_name_in_strec + " baseline (gt = " + multiline_handling + ")\n")
+    base_geo_prec, base_text_prec, base_geo_rec, base_text_rec, base_IoU_pairs, base_num_detected, base_num_gt = prec_rec(map_name_in_strec, multiline_handling, patches, "methods_0")
+    print("\n" + map_name_in_strec + " pyramid - subword dedup, nested word flattening (gt = " + multiline_handling + ")\n")
+    m12_geo_prec, m12_text_prec, m12_geo_rec, m12_text_rec, m12_IoU_pairs, m12_num_detected, m12_num_gt = prec_rec(map_name_in_strec, multiline_handling, patches, "methods_1_2")
+    #print("\n" + map_name_in_strec + " pyramid - subword dedup, nested word flattening, Rumsey's sequence recovery (gt = " + multiline_handling + ")\n")
+    #m12r_geo_prec, m12r_text_prec, m12r_geo_rec, m12r_text_rec, m12r_IoU_pairs, m12r_num_detected, m12r_num_gt = prec_rec(map_name_in_strec, multiline_handling, patches, "methods_1_2_r")
+    print("\n" + map_name_in_strec + " pyramid - subword dedup, nested word flattening, our sequence recovery (gt = " + multiline_handling + ")\n")
+    m123_geo_prec, m123_text_prec, m123_geo_rec, m123_text_rec, m123_IoU_pairs, m123_num_detected, m123_num_gt = prec_rec(map_name_in_strec, multiline_handling, patches, "methods_1_2_3")
+    print("\n" + map_name_in_strec + " pyramid - subword dedup, nested word flattening, our sequence recovery alt (gt = " + multiline_handling + ")\n")
+    m123a_geo_prec, m123a_text_prec, m123a_geo_rec, m123a_text_rec, m123a_IoU_pairs, m123a_num_detected, m123a_num_gt = prec_rec(map_name_in_strec, multiline_handling, patches, "methods_1_2_3a")
 
 def plot_recovered_seq(map_name_in_strec, methods='methods_1_2_3', suffix = ''):
 

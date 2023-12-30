@@ -42,12 +42,16 @@ def calculate_edges(g, geo_threshold, text_threshold):
     for pair in all_pairwise_combs:
         i = pair[0]
         j = pair[1]
+        if (i == 597 and j == 144) or (i == 144 and j == 597):
+            print(g.vs[i]['label'][1], g.vs[j]['label'][1])
         if i != j and not g.are_connected(i, j):
             node1_label = g.vs[i]['label']
             node2_label = g.vs[j]['label']
             weight = IoMs(node1_label, node2_label)
+            if (i == 597 and j == 144) or (i == 144 and j == 597):
+                print(weight)
             if weight[0] > geo_threshold and weight[1] > text_threshold:
-                g.add_edge(i, j, weight=weight)
+                g.add_edge(i, j)
     return g
 
 # combine two labels

@@ -27,6 +27,8 @@ def load_processed_labels(map_name_in_strec, methods):
         df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels.pickle', 'rb'))
     elif methods == "methods_1_2_r":
         df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels_rumsey.pickle', 'rb'))
+    elif methods == "methods_1_2_3a":
+        df = pickle.load(open('processed/strec/' + map_name_in_strec + '/fully_processed_labels_altslsr.pickle', 'rb'))
     df = pd.DataFrame(df['labels'].tolist(), columns=['label_polygons','annotation'])
     return df
 
